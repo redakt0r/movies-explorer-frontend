@@ -1,0 +1,81 @@
+.header {
+  max-height: 74px;
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: #073042;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-right: 70px;
+  padding-bottom: 18px;
+  padding-left: 70px;
+}
+
+.header__home-link {
+  background-image: url('../../images/logo.svg');
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.header__navigation {
+  display: flex;
+}
+
+.header__signup-link {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.header__signin-link {
+  width: 70px;
+  height: 32px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  color: #000;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.header__movies-link {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.header__saved-link {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  margin-left: 20px;
+}
+
+.header__profile-link {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  position: relative;
+  margin-left: 50px;
+}
+
+.header__profile-link::after {
+  content: "";
+  background-image: url(../../images/profile_icon.svg);
+  background-repeat: no-repeat;
+  display: block;
+  border-radius: 6px;
+  position: absolute;
+  left: 60px;
+  top: -8px;
+  width: 30px;
+  height: 30px;
+  background-color: #0F4157;
+  background-position: center;
+}
