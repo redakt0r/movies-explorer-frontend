@@ -1,0 +1,42 @@
+.techs {
+  display: flex;
+  flex-direction: column;
+  background-color: #272727;
+  padding-top: 100px;
+  padding-right: 70px;
+  padding-bottom: 100px;
+  padding-left: 70px;
+}
+.techs__subtitle {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  text-align: center;
+  margin: 90px 0 0;
+}
+
+.techs__text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  margin: 26px auto 0;
+  max-width: 460px;
+}
+
+.techs__item {
+  list-style: none;
+  width: 90px;
+  height: 39px;
+  background-color: #303030;
+  border-radius: 6px;
+  text-align: center;
+  padding-top: 21px;
+}
+
+.techs__list {
+  padding: 0;
+  margin: 100px auto 0;
+  display: flex;
+  column-gap: 10px;
+}
