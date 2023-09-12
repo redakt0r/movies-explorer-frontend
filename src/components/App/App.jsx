@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SeacrhForm';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Main/>
       <Footer/>
       <SearchForm/>
+      <Movies/>
     </div>
   );
 }
