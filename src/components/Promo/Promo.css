@@ -9,8 +9,6 @@
     "link . .";
   padding-top: 75px;
   padding-bottom: 75px;
-  padding-right: 70px;
-  padding-left: 70px;
 }
 
 .promo__title {
@@ -24,7 +22,6 @@
 .promo__subtitle {
   grid-area: subtitle;
   font-size: 13px;
-  line-height: auto;
   margin: 0;
   opacity: 0.5;
   max-width: 310px;
