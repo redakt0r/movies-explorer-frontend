@@ -4,6 +4,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SeacrhForm';
 import Movies from '../Movies/Movies';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Footer/>
       <SearchForm/>
       <Movies/>
+      <Profile/>
     </div>
   );
 }
