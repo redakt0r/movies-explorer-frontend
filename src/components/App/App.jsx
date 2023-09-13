@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SeacrhForm';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <SearchForm/>
       <Movies/>
       <Profile/>
+      <Register/>
     </div>
   );
 }
