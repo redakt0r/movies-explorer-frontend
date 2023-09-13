@@ -8,10 +8,19 @@
   align-items: center;
 }
 
+.register__home-link {
+  background-image: url('../../images/logo.svg');
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  align-self: self-start;
+}
+
 .register__greeting {
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
+  align-self: self-start;
 }
 
 .register__form {

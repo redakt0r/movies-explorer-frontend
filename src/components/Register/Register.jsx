@@ -4,6 +4,7 @@ import "./Register.css";
 function Register() {
   return (
     <section className="section register">
+      <Link className='link register__home-link' to='/'/>
       <p className="register__greeting">Добро пожаловать!</p>
       <form className="register__form">
         <label className="register__label">

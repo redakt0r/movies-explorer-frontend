@@ -7,7 +7,7 @@ const isLoggedIn = true;
 function Header() {
   return (
     <header className='header'>
-      <Link className='header__home-link' />
+      <Link className='link header__home-link' to='/'/>
       {isLoggedIn ? <nav className='header__navigation'>
         <Link className='link header__signup-link' to='/singup' >Регистрация</Link>
         <Link className='link header__signin-link' to='/singin'>Войти</Link>
