@@ -2,24 +2,26 @@
   display: flex;
   flex-direction: column;
   background-color: #272727;
-  padding-top: 100px;
+  padding-top: 102px;
   padding-bottom: 100px;
 }
 .techs__subtitle {
   font-size: 50px;
   font-weight: 400;
-  line-height: 58px;
+  line-height: 1.16;
   text-align: center;
   margin: 90px 0 0;
+  letter-spacing: -0.04em;
 }
 
 .techs__text {
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.43;
   text-align: center;
   margin: 26px auto 0;
   max-width: 460px;
+  letter-spacing: -0.04em;
 }
 
 .techs__item {
@@ -30,6 +32,11 @@
   border-radius: 6px;
   text-align: center;
   padding-top: 21px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  letter-spacing: -0.04em;
+  text-align: center;
 }
 
 .techs__list {

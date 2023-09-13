@@ -1,8 +1,8 @@
 .promo {
   background-color: #073042;
   display: grid;
-  grid-template-columns: minmax(410px, 640px) minmax(10px, 190px) 310px;
-  grid-template-rows: minmax(174px, 220px) 214px 36px;
+  grid-template-columns: minmax(600px, 633px) 1fr 310px;
+  grid-template-rows: minmax(174px, 212px) 176px 36px;
   grid-template-areas:
     "title . image"
     "subtitle . image"
@@ -15,7 +15,7 @@
   grid-area: title;
   font-size: 50px;
   font-weight: 400;
-  line-height: 58px;
+  line-height: 1.16;
   margin: 0;
 }
 
@@ -25,7 +25,6 @@
   margin: 0;
   opacity: 0.5;
   max-width: 310px;
-  padding-top: 36px;
 }
 
 .promo__image {
