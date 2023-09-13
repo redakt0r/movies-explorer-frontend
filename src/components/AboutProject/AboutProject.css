@@ -78,3 +78,32 @@
   font-weight: 500;
   line-height: 1.43;
 }
+
+@media screen and (max-width: 960px) {
+  .about-project {
+    padding-top: 90px;
+    padding-bottom: 122px;
+  }
+
+  .about-project__article-wrapper {
+    max-width: 319px;
+  }
+
+  .about-project__info {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 22px;
+  }
+
+  .about-project__diagram-wrapper {
+    margin-top: 93px;
+  }
+
+  .about-project__diagram_highlighted {
+    width: 177px;
+  }
+
+  .about-project__diagram-caption {
+    margin-top: 13px;
+  }
+}

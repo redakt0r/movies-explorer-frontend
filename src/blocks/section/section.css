@@ -2,3 +2,10 @@
   padding-left: 70px;
   padding-right: 70px;
 }
+
+@media screen and (max-width: 860px) {
+  .section {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

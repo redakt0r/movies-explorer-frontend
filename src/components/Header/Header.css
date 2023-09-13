@@ -79,3 +79,13 @@
   background-color: #0F4157;
   background-position: center;
 }
+
+
+@media screen and (max-width: 860px) {
+  .header {
+    padding-top: 18px;
+    padding-right: 30px;
+    padding-bottom: 21px;
+    padding-left: 30px;
+  }
+}

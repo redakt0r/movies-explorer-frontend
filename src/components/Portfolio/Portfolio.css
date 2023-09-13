@@ -34,8 +34,29 @@
   border-bottom: 1px solid #424242;
   border-left: none;
 }
+
 .portfolio__link-arrow {
   width: 18px;
   height: 50px;
   padding-right: 5px;
+}
+
+@media screen and (max-width: 960px) {
+  .portfolio__link-text {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .portfolio__horizontal-rule {
+    padding-top: 11px;
+  }
+
+  .portfolio__item {
+    padding-top: 27px;
+  }
+
+  .portfolio {
+    padding-bottom: 85px;
+  }
+
 }
