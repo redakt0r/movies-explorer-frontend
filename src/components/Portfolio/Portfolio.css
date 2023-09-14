@@ -60,3 +60,30 @@
   }
 
 }
+
+@media screen and (max-width: 520px) {
+  .portfolio__link-text {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .portfolio__link-arrow {
+    width: 11px;
+    height: 23px;
+    padding-right: 5px;
+  }
+
+  .portfolio__item {
+    padding-top: 0;
+  }
+
+  .portfolio__horizontal-rule {
+    padding-top: 17px;
+  }
+
+  .portfolio__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 22px;
+  }
+}

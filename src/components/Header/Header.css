@@ -25,7 +25,7 @@
 .header__signup-link {
   color: #fff;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   font-weight: 500;
 }
 
@@ -36,7 +36,7 @@
   border-radius: 3px;
   color: #000;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -47,20 +47,20 @@
 .header__movies-link {
   color: #fff;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
 }
 
 .header__saved-link {
   color: #fff;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   margin-left: 20px;
 }
 
 .header__profile-link {
   color: #fff;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   position: relative;
   margin-left: 50px;
 }
@@ -87,5 +87,25 @@
     padding-right: 30px;
     padding-bottom: 21px;
     padding-left: 30px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .header__signin-link {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 1.6;
+    margin-left: 14px;
+  }
+
+  .header__signup-link {
+    font-size: 10px;
+    line-height: 1.6;
   }
 }

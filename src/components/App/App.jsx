@@ -15,12 +15,12 @@ function App() {
       <Header/>
       <Main/>
       <Footer/>
-      <SearchForm/>
+      {/* <SearchForm/>
       <Movies/>
       <Profile/>
       <Register/>
       <Login/>
-      <PageNotFound/>
+      <PageNotFound/> */}
     </div>
   );
 }

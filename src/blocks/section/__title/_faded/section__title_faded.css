@@ -6,3 +6,11 @@
   border: none;
   letter-spacing: 0;
 }
+
+@media screen and (max-width: 520px) {
+  .section__title_faded {
+    font-size: 14px;
+    line-height: 1.27;
+    padding-bottom: 37px;
+  }
+}

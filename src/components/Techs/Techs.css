@@ -75,3 +75,42 @@
     line-height: 1.21;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .techs__list {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .techs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .techs__subtitle {
+    margin-top: 60px;
+    font-size: 30px;
+    line-height: 1.21;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 24px;
+  }
+
+  .techs__list {
+    margin-top: 52px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs__list {
+    max-width: 178px;
+    justify-content: flex-start;
+  }
+}

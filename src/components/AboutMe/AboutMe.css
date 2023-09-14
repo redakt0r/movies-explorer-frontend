@@ -90,3 +90,47 @@
     margin-top: 87px;
   }
 }
+
+@media screen and (max-width: 700px) {
+  .about-me__info {
+    flex-direction: column;
+    row-gap: 40px;
+  }
+
+  .about-me__photo {
+    order: -1;
+    max-width: 292px;
+    max-height: 352px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .about-me {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .about-me__info {
+    padding-top: 60px;
+  }
+
+  .about-me__name{
+    font-size: 30px;
+    line-height: 1.21;
+  }
+
+  .about-me__general{
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 20px;
+  }
+
+  .about-me__text{
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .about-me__link{
+    margin-top: 40px;
+  }
+}

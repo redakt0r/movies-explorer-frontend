@@ -39,7 +39,7 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   color: #fff;
   max-width: 129px;
   min-height: 36px;
@@ -91,3 +91,32 @@
     width: 129px;
   }
 }
+
+@media screen and (max-width: 520px) {
+  .promo {
+    padding-top: 67px;
+    padding-bottom: 30px;
+  }
+
+  .promo__image {
+    max-width: 210px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 1.26;
+    letter-spacing: -0.04em;
+    padding-top: 45px;
+  }
+
+  .promo__subtitle {
+    font-size: 13px;
+    line-height: 1.26;
+    max-width: 260px;
+    padding-top: 24px;
+  }
+  .promo__link {
+    margin-top: 78px;
+  }
+}
+

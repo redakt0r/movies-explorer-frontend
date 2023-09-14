@@ -7,3 +7,11 @@
   margin: 0;
   border-bottom: 1px solid #DADADA;
 }
+
+@media screen and (max-width: 520px) {
+  .section__title {
+    font-size: 18px;
+    line-height: 1.21;
+    padding-bottom: 28px;
+  }
+}
