@@ -2,13 +2,16 @@
   max-height: 74px;
   max-width: 1140px;
   margin: 0 auto;
-  background-color: #073042;
   display: flex;
   justify-content: space-between;
   padding-top: 18px;
   padding-right: 70px;
   padding-bottom: 18px;
   padding-left: 70px;
+}
+
+.header_colored {
+  background-color: #073042;
 }
 
 .header__home-link {
@@ -20,6 +23,7 @@
 
 .header__navigation {
   display: flex;
+  column-gap: 20px;
 }
 
 .header__signup-link {
@@ -44,25 +48,21 @@
   margin-left: 30px;
 }
 
-.header__movies-link {
+.header__nav-link {
   color: #fff;
-  font-size: 12px;
-  line-height: 1.33;
-}
-
-.header__saved-link {
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.33;
-  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28;
 }
 
 .header__profile-link {
   color: #fff;
-  font-size: 12px;
-  line-height: 1.33;
+  font-size: 14px;
+  line-height: 1.14;
+  font-weight: 500;
   position: relative;
-  margin-left: 50px;
+  margin-left: 28px;
+  margin-right: 44px;
 }
 
 .header__profile-link::after {
@@ -72,14 +72,30 @@
   display: block;
   border-radius: 6px;
   position: absolute;
-  left: 60px;
+  left: 69px;
   top: -8px;
   width: 30px;
   height: 30px;
-  background-color: #0F4157;
+  background-color: #313131;
   background-position: center;
 }
 
+.header__profile-link_colored::after {
+  background-color: #0F4157;
+}
+
+.header__burger-button {
+  margin: 0;
+  padding: 0;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background-color: transparent;
+  background-image: url(../../images/burger_icon.svg);
+  background-repeat: no-repeat;
+  background-position-x: 108%;
+  background-position-y: 44%;
+}
 
 @media screen and (max-width: 860px) {
   .header {
@@ -107,5 +123,9 @@
   .header__signup-link {
     font-size: 10px;
     line-height: 1.6;
+  }
+
+  .header__burger-button {
+    width: 30px;
   }
 }

@@ -1,11 +1,19 @@
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 
 function Movies() {
   return (
-    <main className='movies'>
-      <MoviesCardList/>
-    </main>
+    <>
+      <Header/>
+      <main className='movies'>
+        <SearchForm/>
+        <MoviesCardList/>
+      </main>
+      <Footer/>
+    </>
   );
 }
 

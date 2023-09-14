@@ -1,7 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
 function MoviesCardList() {
+  const location = useLocation();
+  const routeWithMoreButton = location.pathname === '/movies'
   return (
     <section className='section movies-list' aria-label='Список фильмов'>
       <ul className='movies-list__list'>
@@ -11,7 +14,7 @@ function MoviesCardList() {
         <MoviesCard/>
         <MoviesCard/>
       </ul>
-      <button className='movies-list__button' type='submit' aria-label='Ещё фильмы'>Ещё</button>
+      {routeWithMoreButton && <button className='movies-list__button' type='button' aria-label='Ещё фильмы'>Ещё</button>}
     </section>
   );
 }

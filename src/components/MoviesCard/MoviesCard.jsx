@@ -1,5 +1,5 @@
 import './MoviesCard.css';
-import cardImage from '../../images/card_image_sample.jpg'
+import cardImage from '../../images/card_image_sample1.jpg'
 
 function MoviesCard() {
   return (
@@ -10,7 +10,7 @@ function MoviesCard() {
           <p className='movies-card__duration'>0ч 42м</p>
         </div>
         <img className='movies-card__cover' src={cardImage} alt="Обложка" />
-        <button className='movies-card__button' type='submit' aria-label='Сохранить'>Сохранить</button>
+        <button className='movies-card__button movies-card__button_active' type='submit' aria-label='Сохранить'>{/* Сохранить */}</button>
       </article>
     </li>
 

@@ -1,11 +1,19 @@
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 
 function SavedMovies() {
   return (
-    <main className='saved-movies'>
-      <MoviesCardList/>
-    </main>
+    <>
+      <Header/>
+      <main className='saved-movies'>
+        <SearchForm/>
+        <MoviesCardList/>
+      </main>
+      <Footer/>
+    </>
   );
 }
 
