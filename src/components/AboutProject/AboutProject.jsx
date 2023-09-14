@@ -15,8 +15,8 @@ function AboutProject() {
         </div>
       </div>
       <div className='about-project__diagram-wrapper'>
-        <figure className='about-project__diagram_highlighted'>
-          <p className='about-project__diagram-data_highlighted'>1 неделя</p>
+        <figure className='about-project__diagram-highlighted'>
+          <p className='about-project__diagram-data-highlighted'>1 неделя</p>
           <figcaption className='about-project__diagram-caption'>Back-end</figcaption>
         </figure>
         <figure className='about-project__diagram'>
