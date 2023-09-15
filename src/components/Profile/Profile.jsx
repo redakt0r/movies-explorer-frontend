@@ -7,15 +7,17 @@ function Profile() {
       <section className="section profile">
         <p className="profile__greeting">Привет, Виталий!</p>
         <form className="profile__form">
-          <label className="profile__label">
-            Имя
-            <input className="profile__input" type="text" required placeholder="Имя"/>
-          </label>
-          <label className="profile__label">
-            E-&nbsp;mail
-            <input className="profile__input" type="text" required placeholder="E-mail"/>
-          </label>
-          <button className="profile__button" type="submit" aria-label="Редактировать">Редактировать</button>
+          <div className='profile__inputs'>
+            <label className="profile__label">
+              Имя
+              <input className="profile__input" type="text" required placeholder="Имя"/>
+            </label>
+            <label className="profile__label">
+              E-&nbsp;mail
+              <input className="profile__input" type="text" required placeholder="E-mail"/>
+            </label>
+          </div>
+          <button className="link profile__button" type="submit" aria-label="Редактировать">Редактировать</button>
         </form>
         <Link className='link profile__signout-link' to='/signout'>Выйти из аккаунта</Link>
       </section>
