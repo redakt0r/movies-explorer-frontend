@@ -4,13 +4,10 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import './Main.css';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
 function Main() {
   return (
     <>
-      <Header/>
       <main className='main'>
         <Promo/>
         <AboutProject/>
@@ -18,7 +15,6 @@ function Main() {
         <AboutMe/>
         <Portfolio/>
       </main>
-      <Footer/>
     </>
 
   );

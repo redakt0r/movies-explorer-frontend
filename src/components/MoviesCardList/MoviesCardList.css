@@ -27,12 +27,7 @@
   font-weight: 500;
   line-height: 15px;
   letter-spacing: 0px;
-  cursor: pointer;
   width: 100%;
-}
-
-.movies-list__button:hover {
-  opacity: 0.8;
 }
 
 @media screen and (max-width: 860px) {

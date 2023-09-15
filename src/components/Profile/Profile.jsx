@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import "./Profile.css";
-import Header from '../Header/Header';
 
 function Profile() {
   return (
     <>
-      <Header/>
       <section className="section profile">
         <p className="profile__greeting">Привет, Виталий!</p>
         <form className="profile__form">

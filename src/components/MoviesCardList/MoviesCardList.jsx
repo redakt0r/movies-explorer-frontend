@@ -14,7 +14,7 @@ function MoviesCardList() {
         <MoviesCard/>
         <MoviesCard/>
       </ul>
-      {routeWithMoreButton && <button className='movies-list__button' type='button' aria-label='Ещё фильмы'>Ещё</button>}
+      {routeWithMoreButton && <button className='button movies-list__button' type='button' aria-label='Ещё фильмы'>Ещё</button>}
     </section>
   );
 }

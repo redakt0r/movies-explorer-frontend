@@ -12,7 +12,7 @@ function SearchForm() {
           placeholder="Фильм"
           required
         />
-        <button className="search-form__button" type="submit" aria-label="Поиск">Поиск</button>
+        <button className="button search-form__button" type="submit" aria-label="Поиск">Поиск</button>
         <FilterCheckbox/>
       </form>
     </section>
