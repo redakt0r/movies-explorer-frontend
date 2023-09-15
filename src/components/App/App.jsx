@@ -17,9 +17,12 @@ function App() {
   const routeWithFooter =
   (location.pathname === '/') || (location.pathname === '/movies') || (location.pathname === '/saved-movies');
 
+  const routeWithHeader =
+  (location.pathname === '/') || (location.pathname === '/movies') || (location.pathname === '/saved-movies') || (location.pathname === '/profile');
+
   return (
     <div className='page'>
-      <Header isLoggedIn={isLoggedIn}/>
+      {routeWithHeader && <Header isLoggedIn={isLoggedIn}/>}
       <Routes>
         <Route path='/' element={<Main/>}/>
         <Route path='/movies' element={<Movies/>}/>

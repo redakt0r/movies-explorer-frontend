@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import './Navigation.css';
 import '../../blocks/link/link.css';
 
-function Navigation(isLoggedIn, routeWithColoredHeader) {
+function Navigation({isLoggedIn, routeWithColoredHeader}) {
   const location = useLocation();
   const routeWithoutNavigation = location.pathname === '/signin' || location.pathname === '/signup'
 

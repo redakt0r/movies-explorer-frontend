@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import "./Login.css";
+import LogoLink from '../LogoLink/LogoLink';
 
 function Login() {
   return (
     <section className="section login">
-      <Link className='link login__home-link' to='/'/>
+      <LogoLink/>
       <p className="login__greeting">Рады видеть!</p>
       <form className="login__form">
         <label className="login__label">

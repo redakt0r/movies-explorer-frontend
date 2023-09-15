@@ -1,27 +1,19 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Header.css';
 import '../../blocks/link/link.css';
 import Navigation from '../Navigation/Navigation';
+import LogoLink from '../LogoLink/LogoLink';
 
-function Header(isLoggedIn) {
-  const [isApprovedRoute, setIsApprovedRoute] = useState(true)
+function Header({isLoggedIn}) {
   const location = useLocation();
-  const routeWithColoredHeader = location.pathname === '/'
-
-  const approvedRoutes = ['/', '/movies', '/saved-movies', '/profile', '/signin', '/signout']
-
-  useEffect(() => {
-    approvedRoutes.includes(location.pathname) ? setIsApprovedRoute(true) : setIsApprovedRoute(false);
-  }, [location.pathname])
+  const routeWithColoredHeader = location.pathname === '/';
 
   return (
     <>
-      {isApprovedRoute &&
-        <header className={`header ${routeWithColoredHeader ? 'header_colored' : ''}`}>
-        <Link className='link header__home-link' to='/'/>
+      <header className={`header ${routeWithColoredHeader ? 'header_colored' : ''}`}>
+        <LogoLink/>
         <Navigation isLoggedIn={isLoggedIn} routeWithColoredHeader={routeWithColoredHeader}/>
-      </header>}
+      </header>
     </>
   );
 }
