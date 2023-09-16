@@ -25,7 +25,6 @@ function MoviesCard() {
         <button className={`button movies-card__button ${isSaved ? 'movies-card__button_saved' : ''}`} type='button' aria-label={isSaved ? 'Фильм сохранен' : 'Сохранить'} onClick={saveMovie}>{isSaved ? '' : 'Сохранить'}</button>}
       </article>
     </li>
-
   );
 }
 

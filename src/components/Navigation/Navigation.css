@@ -63,6 +63,7 @@
 }
 
 .navigation__burger-button {
+  display: none;
   margin: 0;
   padding: 0;
   width: 38px;
@@ -73,6 +74,15 @@
   background-repeat: no-repeat;
   background-position-x: 108%;
   background-position-y: 44%;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__burger-button {
+    display: block;
+  }
+  .navigation__links {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 520px) {
