@@ -6,9 +6,8 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     font-family: "Inter", Arial, Helvetica, sans-serif;
-    background-color: #202020;
+    background-color: var(--main-dark-grey);
     width: 100%;
     color: #fff;
     min-width: 320px;
   }
-  

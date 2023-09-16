@@ -33,7 +33,7 @@
 .search-form__button {
   height: 52px;
   width: 100px;
-  background-color: #4285f4;
+  background-color: var(--accent-blue);
   color: #fff;
   border: none;
   border-radius: 5px;

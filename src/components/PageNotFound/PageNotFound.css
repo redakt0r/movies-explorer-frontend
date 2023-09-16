@@ -20,7 +20,7 @@
 }
 
 .page-not-found__link {
-  color: #4285F4;
+  color: var(--accent-blue);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.21;

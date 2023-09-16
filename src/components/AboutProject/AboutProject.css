@@ -36,7 +36,7 @@
 
 .about-project__diagram-data-highlighted {
   margin: 0;
-  background-color: #3DDC84;
+  background-color: var(--accent-green);
   height: 26px;
   padding-top: 10px;
   color: #000;

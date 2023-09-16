@@ -23,5 +23,5 @@
 
 .greeting-form__input:focus-visible {
   outline: none;
-  border-bottom-color: #4285F4;
+  border-bottom-color: var(--accent-blue);
 }

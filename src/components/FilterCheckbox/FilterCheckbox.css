@@ -47,14 +47,14 @@
 }
 
 .filter-checkbox__checkbox:checked + .filter-checkbox__switch {
-  background: #3ddc84;
+  background: var(--accent-green);
 }
 
 .filter-checkbox__checkbox {
   margin: 0;
   font-size: 13px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 1.38;
 }
 
 .filter-checkbox__title {

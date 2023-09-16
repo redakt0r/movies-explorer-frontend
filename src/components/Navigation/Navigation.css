@@ -14,7 +14,7 @@
 .navigation__signin-link {
   width: 77px;
   height: 32px;
-  background-color: #3DDC84;
+  background-color: var(--accent-green);
   border-radius: 3px;
   color: #000;
   font-size: 12px;
