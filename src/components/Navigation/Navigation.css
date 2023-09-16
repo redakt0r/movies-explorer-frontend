@@ -33,6 +33,10 @@
   line-height: 1.28;
 }
 
+.navigation__link_active {
+  font-weight: 400;
+}
+
 .navigation__profile-link {
   color: #fff;
   font-size: 14px;

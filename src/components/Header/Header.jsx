@@ -3,6 +3,7 @@ import './Header.css';
 import '../../blocks/link/link.css';
 import Navigation from '../Navigation/Navigation';
 import LogoLink from '../LogoLink/LogoLink';
+import NavTab from '../NavTab/NavTab';
 
 function Header({isLoggedIn}) {
   const location = useLocation();
@@ -12,6 +13,7 @@ function Header({isLoggedIn}) {
     <header className={`header ${routeWithColoredHeader ? 'header_colored' : ''}`}>
       <LogoLink/>
       <Navigation isLoggedIn={isLoggedIn} routeWithColoredHeader={routeWithColoredHeader}/>
+      <NavTab/>
     </header>
   );
 }
