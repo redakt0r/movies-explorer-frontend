@@ -64,6 +64,7 @@
   font-weight: 500;
   line-height: 1.14;
   position: relative;
+  margin-right: 44px;
 }
 
 .nav-tab__profile-link::after {
@@ -90,4 +91,20 @@
   padding: 0;
   border: none;
   align-self: flex-end;
+}
+
+@media screen and (max-width: 520px) {
+  .nav-tab__container {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .nav-tab__link {
+    line-height: 1.21;
+    padding-bottom: 7px;
+  }
+
+  .nav-tab__wrapper {
+    row-gap: 15px;
+  }
 }
