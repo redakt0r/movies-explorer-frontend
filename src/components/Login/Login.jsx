@@ -1,24 +1,16 @@
-import { Link } from 'react-router-dom';
 import "./Login.css";
 import LogoLink from '../LogoLink/LogoLink';
+import GreetingForm from '../GreetingForm/GreetingForm';
+import InputWithLabel from '../InputWithLabel/InputWithLabel';
 
 function Login() {
   return (
-    <section className="section login">
+    <section className="login">
       <LogoLink/>
-      <p className="login__greeting">Рады видеть!</p>
-      <form className="login__form">
-        <label className="login__label">
-          E-&nbsp;mail
-          <input className="login__input" type="text" required placeholder="E-mail"/>
-        </label>
-        <label className="login__label">
-          Пароль
-          <input className="login__input" type="password" required placeholder="Пароль"/>
-        </label>
-        <button className="login__button" type="submit" aria-label="Войти">Войти</button>
-      </form>
-      <p className="login__question">Ещё не зарегистрированы? <Link className='link login__signin-link' to='/signin'>Регистрация</Link></p>
+      <GreetingForm greeting={'Рады видеть!'} question={'Ещё не зарегистрированы?'} button={'Войти'} link={{route:'/signup', text:'Регистрация'}}>
+        <InputWithLabel label={'E-mail'} type={'email'}/>
+        <InputWithLabel label={'Пароль'} type={'password'}/>
+      </GreetingForm>
     </section>
   );
 }

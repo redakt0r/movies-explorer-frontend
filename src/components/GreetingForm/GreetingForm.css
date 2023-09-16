@@ -1,0 +1,76 @@
+.greeting-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 40px;
+  max-height: 449px;
+  height: 100%;
+}
+
+.greeting-form__greeting {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.21;
+  align-self: self-start;
+  margin: 0;
+}
+
+.greeting-form__inputs {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  row-gap: 25px;
+}
+
+.greeting-form__button {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.19;
+  color: #fff;
+  background-color: #4285F4;
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 3px;
+  padding: 0;
+  margin-top: auto;
+}
+
+.greeting-form__link {
+  color: #4285F4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+}
+
+.greeting-form__question {
+  color: #8B8B8B;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  margin: 16px 0 0;
+}
+
+@media screen and (max-width: 520px) {
+  .greeting-form {
+    padding-top: 50px;
+    max-height: 578px;
+  }
+  .greeting-form__greeting {
+    align-self: center;
+  }
+  .greeting-form__inputs {
+    padding-top: 80px;
+  }
+  .greeting-form__button {
+    font-size: 12px;
+    line-height: 1.21;
+  }
+  .greeting-form__question {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .greeting-form__link {
+    font-size: 12px;
+  }
+}

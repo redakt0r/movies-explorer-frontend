@@ -2,21 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .page-not-found__code {
   font-size: 140px;
   font-weight: 400;
-  line-height: 169px;
-  padding-top: 246px;
+  line-height: 1.2;
   margin: 0;
 }
 
 .page-not-found__text {
   font-size: 16px;
   font-weight: 400;
-  line-height: 19px;
-  padding-top: 5px;
+  line-height: 1.19;
   margin: 0;
 }
 
@@ -24,6 +23,51 @@
   color: #4285F4;
   font-size: 14px;
   font-weight: 400;
-  line-height: 17px;
-  margin-top: 184px;
+  line-height: 1.21;
+}
+
+.page-not-found__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  max-height: 394px;
+  height: 100%;
+}
+
+.page-not-found__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5px;
+}
+
+@media screen and (max-width: 860px) {
+  .page-not-found__container {
+    padding-top: 263px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .page-not-found__container {
+    padding-top: 131px;
+    max-height: 421px;
+  }
+
+  .page-not-found__code {
+    font-size: 80px;
+    line-height: 1.21;
+  }
+
+  .page-not-found__text {
+    font-size: 12px;
+    line-height: 1.21;
+  }
+  .page-not-found__message {
+    row-gap: 10px;
+  }
+  .page-not-found__link {
+    font-size: 12px;
+  }
 }

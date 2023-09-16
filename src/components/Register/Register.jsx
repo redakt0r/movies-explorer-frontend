@@ -1,28 +1,17 @@
-import { Link } from 'react-router-dom';
 import "./Register.css";
 import LogoLink from '../LogoLink/LogoLink';
+import GreetingForm from '../GreetingForm/GreetingForm';
+import InputWithLabel from '../InputWithLabel/InputWithLabel';
 
 function Register() {
   return (
-    <section className="section register">
+    <section className="register">
       <LogoLink/>
-      <p className="register__greeting">Добро пожаловать!</p>
-      <form className="register__form">
-        <label className="register__label">
-          Имя
-          <input className="register__input" type="text" required placeholder="Имя"/>
-        </label>
-        <label className="register__label">
-          E-&nbsp;mail
-          <input className="register__input" type="text" required placeholder="E-mail"/>
-        </label>
-        <label className="register__label">
-          Пароль
-          <input className="register__input" type="password" required placeholder="Пароль"/>
-        </label>
-        <button className="register__button" type="submit" aria-label="Зарегистрироваться">Зарегистрироваться</button>
-      </form>
-      <p className="register__question">Уже зарегистрированы? <Link className='link register__signin-link' to='/signin'>Войти</Link></p>
+      <GreetingForm greeting={'Добро пожаловать!'} question={'Уже зарегистрированы?'} button={'Зарегистрироваться'} link={{route:'/signin', text:'Войти'}}>
+        <InputWithLabel label={'Имя'} type={'text'}/>
+        <InputWithLabel label={'E-mail'} type={'email'}/>
+        <InputWithLabel label={'Пароль'} type={'password'}/>
+      </GreetingForm>
     </section>
   );
 }
