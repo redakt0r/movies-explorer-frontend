@@ -1,3 +1,7 @@
+.navigation {
+  display: flex;
+}
+
 .navigation__links {
   display: flex;
   column-gap: 20px;

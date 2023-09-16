@@ -4,7 +4,7 @@ import "./GreetingForm.css";
 function GreetingForm({greeting, question, button, link, children}) {
   return (
     <>
-      <form className="greeting-form">
+      <form className="greeting-form__form">
         <p className="greeting-form__greeting">{greeting}</p>
         <div className='greeting-form__inputs'>
           {children}

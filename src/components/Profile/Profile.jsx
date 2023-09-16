@@ -10,7 +10,7 @@ function Profile() {
           <div className='profile__inputs'>
             <label className="profile__label">
               Имя
-              <input className="profile__input" type="text" required placeholder="Имя"/>
+              <input className="profile__input" type="text" required placeholder="Имя" minLength={2} maxLength={20}/>
             </label>
             <label className="profile__label">
               E-&nbsp;mail

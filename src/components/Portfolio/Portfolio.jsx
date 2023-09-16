@@ -25,7 +25,7 @@ function Portfolio() {
         <a
             className="link portfolio__link"
             target="blank"
-            href="https://github.com/redakt0r/how-to-learn"
+            href="https://github.com/redakt0r/russian-travel"
           >
             <p className="portfolio__link-text">Адаптивный сайт</p>
             <img
@@ -40,7 +40,7 @@ function Portfolio() {
         <a
             className="link portfolio__link"
             target="blank"
-            href="https://github.com/redakt0r/how-to-learn"
+            href="https://github.com/redakt0r/react-mesto-api-full-gha"
           >
             <p className="portfolio__link-text">Одностраничное приложение</p>
             <img

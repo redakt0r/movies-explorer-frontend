@@ -11,6 +11,8 @@ function SearchForm() {
           name="movie"
           placeholder="Фильм"
           required
+          minLength={2}
+          maxLength={30}
         />
         <button className="button search-form__button" type="submit" aria-label="Поиск">Поиск</button>
         <FilterCheckbox/>
