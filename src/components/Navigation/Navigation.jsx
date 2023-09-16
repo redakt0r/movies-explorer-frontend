@@ -4,6 +4,7 @@ import '../../blocks/link/link.css';
 
 function Navigation({isLoggedIn, routeWithColoredHeader}) {
   const openNavTab = () => {
+    document.querySelector('body').style.overflowY ='hidden';
     const navTab = document.querySelector('.nav-tab');
     navTab.classList.add('nav-tab_opened');
   }

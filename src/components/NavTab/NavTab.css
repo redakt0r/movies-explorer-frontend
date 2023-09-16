@@ -4,11 +4,10 @@
   top: 0;
   right: 0;
   height: 100vh;
-  width: 67.7%;
-  background-color: #272727;
+  width: 100%;
+  background-color: rgba(0,0,0,.3);
   z-index: 1;
-  padding: 28px;
-  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .nav-tab_opened {
@@ -16,11 +15,15 @@
 }
 
 .nav-tab__container {
-  width: 100%;
+  padding: 28px;
+  margin-left: auto;
+  width: 67.7%;
+  background-color: #272727;
   display: flex;
   flex-direction: column;
   row-gap: 113px;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .nav-tab__links {

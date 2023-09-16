@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function NavTab() {
   const closeNavTab = () => {
+    document.querySelector('body').style.overflowY ='auto';
     const navTab = document.querySelector('.nav-tab');
     navTab.classList.remove('nav-tab_opened');
   }
