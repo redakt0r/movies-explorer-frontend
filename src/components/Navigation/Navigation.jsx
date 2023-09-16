@@ -1,12 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './Navigation.css';
 import '../../blocks/link/link.css';
 
 function Navigation({isLoggedIn, routeWithColoredHeader}) {
-  const location = useLocation();
-  const routeWithoutNavigation = location.pathname === '/signin' || location.pathname === '/signup'
-
   const [isMobile, setIsMobile] = useState(true);
 
   const handleNavigationVersion = () => {
@@ -20,22 +17,18 @@ function Navigation({isLoggedIn, routeWithColoredHeader}) {
 
   return (
     <>
-      {!routeWithoutNavigation &&
-      <>
-        {isLoggedIn && (
-          isMobile ? <button className='button navigation__burger-button' type='button' aria-label='Меню'></button> :
-          <nav className='navigation__links'>
-            <Link className='link navigation__link' to='/movies' >Фильмы</Link>
-            <Link className='link navigation__link' to='/saved-movies' >Сохранённые фильмы</Link>
-            <Link className={`link navigation__profile-link ${routeWithColoredHeader ? 'navigation__profile-link_colored' : ''}`} to='/profile'>Аккаунт</Link>
-        </nav>
-        )}
-        {!isLoggedIn && <nav className='navigation__links'>
-          <Link className='link navigation__signup-link' to='/singup' >Регистрация</Link>
-          <Link className='link navigation__signin-link' to='/singin'>Войти</Link>
-        </nav>}
-      </>
-      }
+      {isLoggedIn && (
+        isMobile ? <button className='button navigation__burger-button' type='button' aria-label='Меню'></button> :
+        <nav className='navigation__links'>
+          <Link className='link navigation__link' to='/movies' >Фильмы</Link>
+          <Link className='link navigation__link' to='/saved-movies' >Сохранённые фильмы</Link>
+          <Link className={`link navigation__profile-link ${routeWithColoredHeader ? 'navigation__profile-link_colored' : ''}`} to='/profile'>Аккаунт</Link>
+      </nav>
+      )}
+      {!isLoggedIn && <nav className='navigation__links'>
+        <Link className='link navigation__signup-link' to='/singup' >Регистрация</Link>
+        <Link className='link navigation__signin-link' to='/singin'>Войти</Link>
+      </nav>}
     </>
   );
 }

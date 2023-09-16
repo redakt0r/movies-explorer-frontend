@@ -9,12 +9,10 @@ function Header({isLoggedIn}) {
   const routeWithColoredHeader = location.pathname === '/';
 
   return (
-    <>
-      <header className={`header ${routeWithColoredHeader ? 'header_colored' : ''}`}>
-        <LogoLink/>
-        <Navigation isLoggedIn={isLoggedIn} routeWithColoredHeader={routeWithColoredHeader}/>
-      </header>
-    </>
+    <header className={`header ${routeWithColoredHeader ? 'header_colored' : ''}`}>
+      <LogoLink/>
+      <Navigation isLoggedIn={isLoggedIn} routeWithColoredHeader={routeWithColoredHeader}/>
+    </header>
   );
 }
 
