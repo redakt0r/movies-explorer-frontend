@@ -19,7 +19,6 @@ function Portfolio() {
               alt="Иконка ссылки"
             />
           </a>
-          <hr className="portfolio__horizontal-rule" />
         </li>
         <li className="portfolio__item">
         <a
@@ -34,7 +33,6 @@ function Portfolio() {
               alt="Иконка ссылки"
             />
           </a>
-          <hr className="portfolio__horizontal-rule" />
         </li>
         <li className="portfolio__item">
         <a

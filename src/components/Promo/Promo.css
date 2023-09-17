@@ -41,7 +41,7 @@
   font-size: 12px;
   line-height: 1.33;
   color: #fff;
-  max-width: 129px;
+  max-width: 128px;
   min-height: 36px;
   border-radius: 3px;
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -77,12 +77,12 @@
 
   .promo__title {
     text-align: center;
-    padding-top: 48px;
+    padding-top: 50px;
   }
 
   .promo__subtitle {
     text-align: center;
-    padding-top: 22px;
+    padding-top: 23px;
     max-width: 260px;
   }
 
@@ -94,7 +94,7 @@
 
 @media screen and (max-width: 520px) {
   .promo {
-    padding-top: 67px;
+    padding-top: 70px;
     padding-bottom: 30px;
   }
 

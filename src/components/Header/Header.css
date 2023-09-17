@@ -6,12 +6,19 @@
   justify-content: space-between;
   padding-top: 18px;
   padding-bottom: 18px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 75px;
+  padding-right: 75px;
 }
 
 .header_colored {
   background-color: #073042;
+}
+
+@media screen and (max-width: 860px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 @media screen and (max-width: 520px) {
