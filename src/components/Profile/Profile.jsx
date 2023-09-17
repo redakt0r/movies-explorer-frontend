@@ -3,9 +3,8 @@ import "./Profile.css";
 
 function Profile() {
   return (
-    <>
-      <section className="section profile">
-        <p className="profile__greeting">Привет, Виталий!</p>
+      <main className="profile">
+        <h1 className="profile__greeting">Привет, Виталий!</h1>
         <form className="profile__form">
           <div className='profile__inputs'>
             <label className="profile__label">
@@ -20,8 +19,7 @@ function Profile() {
           <button className="link profile__button" type="submit" aria-label="Редактировать">Редактировать</button>
         </form>
         <Link className='link profile__signout-link' to='/signout'>Выйти из аккаунта</Link>
-      </section>
-    </>
+      </main>
   );
 }
 

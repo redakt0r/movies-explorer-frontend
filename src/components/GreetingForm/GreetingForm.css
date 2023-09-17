@@ -53,6 +53,9 @@
 
 @media screen and (max-width: 520px) {
   .greeting-form {
+    padding-top: 56px;
+  }
+  .greeting-form__form {
     padding-top: 50px;
     max-height: 578px;
   }

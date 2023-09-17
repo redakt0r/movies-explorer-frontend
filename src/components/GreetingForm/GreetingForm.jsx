@@ -5,7 +5,7 @@ function GreetingForm({greeting, question, button, link, children}) {
   return (
     <>
       <form className="greeting-form__form">
-        <p className="greeting-form__greeting">{greeting}</p>
+        <h1 className="greeting-form__greeting">{greeting}</h1>
         <div className='greeting-form__inputs'>
           {children}
         </div>

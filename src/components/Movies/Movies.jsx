@@ -4,12 +4,10 @@ import './Movies.css';
 
 function Movies() {
   return (
-    <>
-      <main className='movies'>
-        <SearchForm/>
-        <MoviesCardList/>
-      </main>
-    </>
+    <main className='movies'>
+      <SearchForm/>
+      <MoviesCardList/>
+    </main>
   );
 }
 
