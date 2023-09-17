@@ -43,7 +43,7 @@
 }
 
 .profile__label:last-of-type {
-  border-bottom: none;
+  border-bottom-color: transparent;
 }
 
 .profile__inputs {
@@ -62,6 +62,14 @@
   line-height: 1.21;
   color: #fff;
   padding: 0;
+}
+
+.profile__input:focus-visible {
+  outline: none;
+}
+
+.profile__label:has(.profile__input:focus-visible) {
+  border-bottom-color: var(--accent-blue);
 }
 
 .profile__button {

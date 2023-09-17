@@ -10,7 +10,7 @@ function Register() {
       <GreetingForm greeting={'Добро пожаловать!'} question={'Уже зарегистрированы?'} button={'Зарегистрироваться'} link={{route:'/signin', text:'Войти'}}>
         <InputWithLabel label={'Имя'} type={'text'} minLength={2} maxLength={20}/>
         <InputWithLabel label={'E-mail'} type={'email'}/>
-        <InputWithLabel label={'Пароль'} type={'password'} minLength={4}/>
+        <InputWithLabel label={'Пароль'} type={'password'} minLength={4} maxLength={30}/>
       </GreetingForm>
     </main>
   );

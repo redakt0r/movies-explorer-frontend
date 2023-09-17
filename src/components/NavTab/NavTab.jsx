@@ -11,7 +11,7 @@ function NavTab() {
   return (
     <div className='nav-tab'>
       <div className='nav-tab__container'>
-        <button className='button nav-tab__close-button' onClick={closeNavTab}></button>
+        <button className='button nav-tab__close-button' type='button' onClick={closeNavTab}></button>
         <nav className='nav-tab__links'>
           <div className='nav-tab__wrapper'>
             <NavLink className={setActive} to='/' onClick={closeNavTab} >Главная</NavLink>

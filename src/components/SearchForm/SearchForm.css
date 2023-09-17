@@ -26,8 +26,9 @@
   color: #fff;
 }
 
-.search-form__input:focus {
-  outline: 2px solid rgb(170, 170, 170, 0.8);
+.search-form__input:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -1px;
 }
 
 .search-form__button {

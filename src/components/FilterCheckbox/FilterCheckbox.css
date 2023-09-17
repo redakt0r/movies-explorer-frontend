@@ -15,6 +15,7 @@
   width: 0;
   height: 0;
 }
+
 .filter-checkbox__switch {
   display: block;
   position: relative;
@@ -24,6 +25,10 @@
   background: #EBEBEB;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
+}
+
+.filter-checkbox__switch:hover {
+  opacity: 0.8;
 }
 
 .filter-checkbox__switch:before {
