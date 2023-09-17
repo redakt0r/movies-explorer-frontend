@@ -3,6 +3,8 @@
   max-width: 360px;
   background-color: #222222;
   border-radius: 6px;
+  width: 100%;
+  max-width: 360px;
 }
 
 .movies-card__info {
@@ -70,12 +72,20 @@
 }
 
 @media screen and (max-width: 860px) {
+  .movies-card {
+    max-width: 342px;
+  }
+
   .movies-card__cover {
     max-height: 190px;
   }
 }
 
 @media screen and (max-width: 420px) {
+  .movies-card {
+    max-width: 300px;
+  }
+
   .movies-card__cover {
     max-height: 168px;
   }

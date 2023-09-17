@@ -64,6 +64,12 @@
   line-height: 1.28;
 }
 
+@media screen and (max-width: 860px) {
+  .filter-checkbox {
+    padding-bottom: 50px;
+  }
+}
+
 @media screen and (max-width: 420px) {
   .filter-checkbox {
     padding-top: 29px;

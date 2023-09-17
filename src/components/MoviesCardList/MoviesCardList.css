@@ -13,6 +13,7 @@
   margin: 0 auto;
   column-gap: 28px;
   row-gap: 32px;
+  justify-items: center;
 }
 
 .movies-list__button {
@@ -38,7 +39,7 @@
   }
 
   .movies-list__list {
-    padding-top: 74px;
+    padding-top: 72px;
   }
 
   .movies-list__button {
