@@ -11,3 +11,7 @@
 @import url(./blocks/link/link.css);
 
 @import url(./blocks/button/button.css);
+
+body {
+  background-color: var(--main-dark-grey);
+}

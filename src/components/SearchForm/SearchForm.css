@@ -22,7 +22,7 @@
   line-height: 1.11;
   border: 1.5px solid #AAAAAA;
   border-radius: 8px;
-  background-color: #202020;
+  background-color: var(--main-dark-grey);
   color: #fff;
 }
 

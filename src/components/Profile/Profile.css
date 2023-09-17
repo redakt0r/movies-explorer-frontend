@@ -54,7 +54,7 @@
 
 .profile__input {
   border: none;
-  background-color: #202020;
+  background-color: var(--main-dark-grey);
   text-align: right;
   width: 100%;
   font-size: 11px;
@@ -70,9 +70,10 @@
   font-weight: 400;
   line-height: 1.23;
   color: #fff;
-  background-color: #202020;
+  background-color: var(--main-dark-grey);
   width: fit-content;
   border: none;
+  cursor: pointer;
 }
 
 .profile__button:hover {
