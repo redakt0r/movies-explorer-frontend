@@ -12,11 +12,18 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUser, setCurrentUser] = useState({
+    name: "Витаааля",
+    email: "не загружено...",
+  });
+
   return (
-    <div className="page">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
       <Routes>
         <Route
           path="/"
@@ -38,25 +45,25 @@ function App() {
               <Footer />
             </>
           } />
-        <Route
-          path="/saved-movies"
-          element={
-            <>
-              <Header isLoggedIn={isLoggedIn} />
-              <SavedMovies />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Header isLoggedIn={isLoggedIn} />
-              <Profile />
-            </>
-          }
-        />
+          <Route
+            path="/saved-movies"
+            element={
+              <>
+                <Header isLoggedIn={isLoggedIn} />
+                <SavedMovies />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Header isLoggedIn={isLoggedIn} />
+                <Profile />
+              </>
+            }
+          />
         </Route>
 
         <Route path="/signin" element={<Login />} />
@@ -64,6 +71,8 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
+    </CurrentUserContext.Provider>
+
   );
 }
 
