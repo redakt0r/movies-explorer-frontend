@@ -1,4 +1,6 @@
+import React from 'react';
 import "./App.css";
+import ProtectedRouteElement from "../ProtectedRouteElement/ProtectedRouteElement";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -13,6 +15,7 @@ import Footer from "../Footer/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   return (
     <div className="page">
       <Routes>
@@ -29,11 +32,16 @@ function App() {
         <Route
           path="/movies"
           element={
-            <>
-              <Header isLoggedIn={isLoggedIn} />
-              <Movies />
-              <Footer />
-            </>
+            <ProtectedRouteElement
+              isLoggedIn={isLoggedIn}
+              element={
+                <>
+                  <Header isLoggedIn={isLoggedIn} />
+                  <Movies />
+                  <Footer />
+                </>
+              }
+            />
           }
         />
         <Route
