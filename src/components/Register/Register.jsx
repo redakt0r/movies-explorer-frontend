@@ -2,27 +2,18 @@ import "./Register.css";
 import LogoLink from '../LogoLink/LogoLink';
 import GreetingForm from '../GreetingForm/GreetingForm';
 import InputWithLabel from '../InputWithLabel/InputWithLabel';
-import { auth } from '../../utils/Auth';
 import useForm from "../../hooks/useForm";
 
-function Register() {
+function Register({ onRegister }) {
   const { values, handleChange } = useForm({
     name: "",
     email: "",
     password: "",
   });
 
-  const handleRegister = ({ name, email, password }) => {
-    auth
-      .signUp(name, email, password)
-      .then((res) => {
-        console.log(res)
-      })
-  }
-
   const onSubmit = (e) => {
     e.preventDefault();
-    handleRegister(values);
+    onRegister(values);
   }
 
   return (

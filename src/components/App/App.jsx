@@ -8,26 +8,51 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-// import { createContext } from "react";
 import { auth } from "../../utils/Auth";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
-    name: "Витаааля",
+    name: "не загружено...",
     email: "не загружено...",
   });
   const value = {currentUser, setCurrentUser}
+  const navigate = useNavigate();
 
-/*   const CurrentUserContext = createContext({
-    currentUser: { name: "Витаааля", email: "не загружено..." },
-    setCurrentUser: () => {},
-  }); */
+  const handleRegister = ({ name, email, password }) => {
+    auth
+      .signUp(name, email, password)
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          setCurrentUser(res);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const handleLogin = ({ email, password }) => {
+    auth
+      .signIn(email, password)
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          setCurrentUser(res);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <CurrentUserContext.Provider value={value}>
@@ -75,8 +100,8 @@ function App() {
             />
           </Route>
 
-          <Route path="/signin" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login onLogin={handleLogin}/>} />
+          <Route path="/signup" element={<Register onRegister={handleRegister}/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
