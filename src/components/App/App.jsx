@@ -9,7 +9,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -23,6 +23,20 @@ function App() {
   });
   const value = {currentUser, setCurrentUser}
   const navigate = useNavigate();
+
+  useEffect(() => {
+    auth
+      .getUserInfo()
+      .then((res) => {
+        if (res.user) {
+          setIsLoggedIn(true);
+          setCurrentUser(res.user);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleRegister = ({ name, email, password }) => {
     auth
@@ -45,8 +59,21 @@ function App() {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          setCurrentUser(res);
+          setCurrentUser(res.user);
           navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const handleUpdateUser = ({ email, password }) => {
+    auth
+      .patchUserInfo(email, password)
+      .then((res) => {
+        if (res) {
+          setCurrentUser(res);
         }
       })
       .catch((err) => {
@@ -94,7 +121,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <Profile />
+                  <Profile handleEditUser={handleUpdateUser}/>
                 </>
               }
             />

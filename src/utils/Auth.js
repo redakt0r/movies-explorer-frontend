@@ -54,6 +54,18 @@ class Auth {
     }).then((res) => this._checkResponse(res));
   }
 
+  patchUserInfo(name, email) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      })
+    }).then((res) => this._checkResponse(res))
+  }
+
 }
 
 export const auth = new Auth(AuthApiConfig);
