@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import "./GreetingForm.css";
 
-function GreetingForm({greeting, question, button, link, children}) {
+function GreetingForm({greeting, question, button, link, children, onSubmit}) {
+
   return (
     <>
-      <form className="greeting-form__form">
+      <form className="greeting-form__form" onSubmit={onSubmit}>
         <h1 className="greeting-form__greeting">{greeting}</h1>
         <div className='greeting-form__inputs'>
           {children}

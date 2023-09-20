@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Main from "../Main/Main";
@@ -12,67 +12,75 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+// import { createContext } from "react";
+import { auth } from "../../utils/Auth";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "Витаааля",
     email: "не загружено...",
   });
+  const value = {currentUser, setCurrentUser}
+
+/*   const CurrentUserContext = createContext({
+    currentUser: { name: "Витаааля", email: "не загружено..." },
+    setCurrentUser: () => {},
+  }); */
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={value}>
       <div className="page">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header isLoggedIn={isLoggedIn} />
-              <Main />
-              <Footer/>
-            </>
-          }
-        />
-        <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} />}>
+        <Routes>
           <Route
-          path="/movies"
-          element={
-            <>
-              <Header isLoggedIn={isLoggedIn} />
-              <Movies />
-              <Footer />
-            </>
-          } />
-          <Route
-            path="/saved-movies"
+            path="/"
             element={
               <>
                 <Header isLoggedIn={isLoggedIn} />
-                <SavedMovies />
+                <Main />
                 <Footer />
               </>
             }
           />
-          <Route
-            path="/profile"
-            element={
-              <>
-                <Header isLoggedIn={isLoggedIn} />
-                <Profile />
-              </>
-            }
-          />
-        </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} />}>
+            <Route
+              path="/movies"
+              element={
+                <>
+                  <Header isLoggedIn={isLoggedIn} />
+                  <Movies />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <>
+                  <Header isLoggedIn={isLoggedIn} />
+                  <SavedMovies />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <Header isLoggedIn={isLoggedIn} />
+                  <Profile />
+                </>
+              }
+            />
+          </Route>
 
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </div>
+          <Route path="/signin" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
     </CurrentUserContext.Provider>
-
   );
 }
 
