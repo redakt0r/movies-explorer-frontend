@@ -4,7 +4,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { useContext, useState } from 'react';
 import useForm from '../../hooks/useForm';
 
-function Profile({ handleEditUser }) {
+function Profile({ handleEditUser, errorMessage, onSignOut }) {
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange } = useForm({
     name: currentUser.name,
@@ -17,6 +17,7 @@ function Profile({ handleEditUser }) {
   const onSubmit = (e) => {
     e.preventDefault();
     handleEditUser(values);
+    setEditMode(false);
   }
 
   return (
@@ -30,13 +31,18 @@ function Profile({ handleEditUser }) {
             </label>
             <label className="profile__label">
               E-&nbsp;mail
-              <input name='email' value={values.email} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="text" required placeholder="E-mail"/>
+              <input name='email' value={values.email} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="email" required placeholder="E-mail"/>
             </label>
           </div>
-          {!isEditMode ? <button className="link profile__edit-button" type="button" aria-label="Редактировать" onClick={()=>setEditMode(true)}>Редактировать</button> :
-          <button disabled={!isChanged} className={`button profile__save-button ${isChanged ? 'profile__save-button_active' : ''}`} type="submit" aria-label="Сохранить">Сохранить</button>}
+          {!isEditMode ?
+            <button className="link profile__edit-button" type="button" aria-label="Редактировать" onClick={()=>setEditMode(true)}>Редактировать</button>
+          :
+          <>
+            <p className='profile__error-message'>{errorMessage}</p>
+            <button disabled={!isChanged} className={`button profile__save-button ${isChanged ? 'profile__save-button_active' : ''}`} type="submit" aria-label="Сохранить">Сохранить</button>
+          </>}
         </form>
-        <Link className='link profile__signout-link' to='/signout'>Выйти из аккаунта</Link>
+        {!isEditMode && <Link className='link profile__signout-link' to='/' onClick={onSignOut}>Выйти из аккаунта</Link>}
       </main>
   );
 }

@@ -1,4 +1,4 @@
-import { AuthApiConfig } from "../constants/constants";
+import { AUTH_API_CONFIG } from "../constants/constants";
 
 class Auth {
   constructor({baseUrl, headers}) {
@@ -8,7 +8,7 @@ class Auth {
 
   _checkResponse(res) {
     if (!res.ok) {
-      return Promise.reject(`Ошибочка: ${res.status}`);
+      return Promise.reject(res.json());
     }
     return res.json();
   }
@@ -68,4 +68,4 @@ class Auth {
 
 }
 
-export const auth = new Auth(AuthApiConfig);
+export const auth = new Auth(AUTH_API_CONFIG);

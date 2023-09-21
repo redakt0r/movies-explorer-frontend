@@ -95,7 +95,7 @@
   height: 45px;
   border: none;
   border-radius: 3px;
-  margin-top: auto;
+  margin-top: 20px;
   cursor: auto;
 }
 
@@ -131,6 +131,15 @@
   font-size: 13px;
   font-weight: 500;
   line-height: 1.23;
+}
+
+.profile__error-message {
+  margin: auto 0 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.18;
+  color: #FF004C;
+  text-align: center;
 }
 
 @media screen and (max-width: 860px) {

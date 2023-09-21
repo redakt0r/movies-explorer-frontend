@@ -12,16 +12,17 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { auth } from "../../utils/Auth";
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "не загружено...",
     email: "не загружено...",
   });
-  const value = {currentUser, setCurrentUser}
+  const value = { currentUser, setCurrentUser };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        err.then(({ message }) => setErrorMessage(message));
       });
   }, []);
 
@@ -51,7 +52,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   const handleLogin = ({ email, password }) => {
     auth
@@ -66,20 +67,30 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
-  const handleUpdateUser = ({ email, password }) => {
+  const handleUpdateUser = ({ name, email }) => {
     auth
-      .patchUserInfo(email, password)
+      .patchUserInfo(name, email)
       .then((res) => {
         if (res) {
           setCurrentUser(res);
         }
       })
       .catch((err) => {
+        setErrorMessage(err);
         console.log(err);
       });
-  }
+  };
+
+  const handleSignOut = () => {
+    auth.signOut().then((message) => console.log(message));
+    setIsLoggedIn(false);
+    setCurrentUser({
+      name: "не загружено...",
+      email: "не загружено...",
+    });
+  };
 
   return (
     <CurrentUserContext.Provider value={value}>
@@ -121,14 +132,21 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <Profile handleEditUser={handleUpdateUser}/>
+                  <Profile
+                    handleEditUser={handleUpdateUser}
+                    errorMessage={errorMessage}
+                    onSignOut={handleSignOut}
+                  />
                 </>
               }
             />
           </Route>
 
-          <Route path="/signin" element={<Login onLogin={handleLogin}/>} />
-          <Route path="/signup" element={<Register onRegister={handleRegister}/>} />
+          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="/signup"
+            element={<Register onRegister={handleRegister} />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
