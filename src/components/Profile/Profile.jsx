@@ -4,7 +4,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { useContext, useState } from 'react';
 import useForm from '../../hooks/useForm';
 
-function Profile({ handleEditUser, errorMessage, onSignOut }) {
+function Profile({ handleEditUser, errorMessage, onSignOut, setErrorMessage }) {
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange } = useForm({
     name: currentUser.name,
@@ -14,10 +14,15 @@ function Profile({ handleEditUser, errorMessage, onSignOut }) {
 
   let isChanged = values.name !== currentUser.name || values.email !== currentUser.email
 
-  const onSubmit = (e) => {
+  const handleEditMode = () => {
+    setErrorMessage('');
+    setEditMode(true)
+  }
+  async function onSubmit(e) {
     e.preventDefault();
-    handleEditUser(values);
-    setEditMode(false);
+    if (await handleEditUser(values)) {
+      setEditMode(false);
+    }
   }
 
   return (
@@ -35,7 +40,7 @@ function Profile({ handleEditUser, errorMessage, onSignOut }) {
             </label>
           </div>
           {!isEditMode ?
-            <button className="link profile__edit-button" type="button" aria-label="Редактировать" onClick={()=>setEditMode(true)}>Редактировать</button>
+            <button className="link profile__edit-button" type="button" aria-label="Редактировать" onClick={handleEditMode}>Редактировать</button>
           :
           <>
             <p className='profile__error-message'>{errorMessage}</p>

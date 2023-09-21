@@ -14,6 +14,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { auth } from "../../utils/Auth";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -65,7 +66,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        err.then(({ message }) => setErrorMessage(message));
       });
   };
 
@@ -78,8 +79,11 @@ function App() {
         }
       })
       .catch((err) => {
-        setErrorMessage(err);
-        console.log(err);
+        err.then((err) => {
+          if (err.message === "Validation failed") {
+            setErrorMessage(err.validation.body.message);
+          } else setErrorMessage(err.statusCode);
+        });
       });
   };
 
@@ -95,6 +99,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={value}>
       <div className="page">
+        <InfoTooltip isOpen={true} error={true}/>
         <Routes>
           <Route
             path="/"
@@ -136,6 +141,7 @@ function App() {
                     handleEditUser={handleUpdateUser}
                     errorMessage={errorMessage}
                     onSignOut={handleSignOut}
+                    setErrorMessage={setErrorMessage}
                   />
                 </>
               }
