@@ -3,6 +3,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 
 function Movies() {
+  console.log(JSON.parse(localStorage.getItem("moviesList")))
   return (
     <main className='movies'>
       <SearchForm/>

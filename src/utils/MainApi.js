@@ -1,6 +1,6 @@
 import { AUTH_API_CONFIG } from "../constants/constants";
 
-class Auth {
+class MainApi {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -68,4 +68,4 @@ class Auth {
 
 }
 
-export const auth = new Auth(AUTH_API_CONFIG);
+export const mainApi = new MainApi(AUTH_API_CONFIG);

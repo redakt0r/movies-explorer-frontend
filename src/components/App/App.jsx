@@ -13,8 +13,9 @@ import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { auth } from "../../utils/Auth";
+import { mainApi } from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +34,7 @@ function App() {
   }
 
   useEffect(() => {
-    auth
+    mainApi
       .getUserInfo()
       .then((res) => {
         if (res.user) {
@@ -46,8 +47,20 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('moviesList', JSON.stringify(res))
+      })
+      .catch((err) => {
+        err.then(({ message }) => setErrorMessage(message));
+      });
+  }, []);
+
   const handleRegister = ({ name, email, password }) => {
-    auth
+    mainApi
       .signUp(name, email, password)
       .then((res) => {
         if (res) {
@@ -67,7 +80,7 @@ function App() {
   };
 
   const handleLogin = ({ email, password }) => {
-    auth
+    mainApi
       .signIn(email, password)
       .then((res) => {
         if (res) {
@@ -86,7 +99,7 @@ function App() {
   };
 
   const handleUpdateUser = ({ name, email }) => {
-    auth
+    mainApi
       .patchUserInfo(name, email)
       .then((res) => {
         if (res) {
@@ -104,7 +117,7 @@ function App() {
   };
 
   const handleSignOut = () => {
-    auth.signOut().then((message) => console.log(message));
+    mainApi.signOut().then((message) => console.log(message));
     setIsLoggedIn(false);
     setCurrentUser({
       name: "не загружено...",
