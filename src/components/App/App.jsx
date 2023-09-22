@@ -58,7 +58,11 @@ function App() {
         }
       })
       .catch((err) => {
-        err.then(({ message }) => setErrorMessage(message));
+        err.then((err) => {
+          if (err.message === "Validation failed") {
+            setErrorMessage(err.validation.body.message);
+          } else setErrorMessage(err.message);
+        });
       });
   };
 
@@ -73,7 +77,11 @@ function App() {
         }
       })
       .catch((err) => {
-        err.then(({ message }) => setErrorMessage(message));
+        err.then((err) => {
+          if (err.message === "Validation failed") {
+            setErrorMessage(err.validation.body.message);
+          } else setErrorMessage(err.message);
+        });
       });
   };
 
