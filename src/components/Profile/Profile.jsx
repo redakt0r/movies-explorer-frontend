@@ -22,7 +22,7 @@ function Profile({ handleEditUser, errorMessage, onSignOut, setErrorMessage }) {
     e.preventDefault();
     if (await handleEditUser(values)) {
       setEditMode(false);
-    }
+    } else return;
   }
 
   return (

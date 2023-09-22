@@ -1,18 +1,20 @@
 import "./InfoTooltip.css";
 
-function InfoTooltip({ isOpen, onClose, message, error }) {
+function InfoTooltip({ closeAndClear, message, error }) {
   const handleOverlay = (e) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      closeAndClear();
     }
   };
   return (
     <div
-      className={`info-tooltip ${isOpen ? "info-tooltip_opened" : ""}`}
+      className={`info-tooltip ${
+        error || message ? "info-tooltip_opened" : ""
+      }`}
       onClick={handleOverlay}
     >
       <div className="info-tooltip__container">
-        {error ? (
+        {error && (
           <>
             <svg
               width="120"
@@ -29,7 +31,8 @@ function InfoTooltip({ isOpen, onClose, message, error }) {
               />
             </svg>{" "}
           </>
-        ) : (
+        )}
+        {message && (
           <>
             <svg
               className=""
@@ -48,13 +51,12 @@ function InfoTooltip({ isOpen, onClose, message, error }) {
             </svg>
           </>
         )}
-
-        <h2 className="info-tooltip__message">{message}</h2>
+        <h2 className="info-tooltip__message">{error || message}</h2>
         <button
           className="button info-tooltip__close-button"
           type="button"
           aria-label="Закрыть."
-          onClick={onClose}
+          onClick={closeAndClear}
         />
       </div>
     </div>

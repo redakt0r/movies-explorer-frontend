@@ -23,8 +23,14 @@ function App() {
     name: "не загружено...",
     email: "не загружено...",
   });
+  const [message, setMessage] = useState('')
   const value = { currentUser, setCurrentUser };
   const navigate = useNavigate();
+
+  const clearErrorAndMessage = () => {
+    setErrorMessage('');
+    setMessage('');
+  }
 
   useEffect(() => {
     auth
@@ -46,12 +52,13 @@ function App() {
       .then((res) => {
         if (res) {
           setIsLoggedIn(true);
-          setCurrentUser(res);
+          setCurrentUser(res.user);
           navigate("/", { replace: true });
+          setMessage('Вы зарегестрированы!')
         }
       })
       .catch((err) => {
-        console.log(err);
+        err.then(({ message }) => setErrorMessage(message));
       });
   };
 
@@ -76,13 +83,14 @@ function App() {
       .then((res) => {
         if (res) {
           setCurrentUser(res);
+          setMessage('Данные обновлены!');
         }
       })
       .catch((err) => {
         err.then((err) => {
           if (err.message === "Validation failed") {
             setErrorMessage(err.validation.body.message);
-          } else setErrorMessage(err.statusCode);
+          } else setErrorMessage(err.message);
         });
       });
   };
@@ -94,12 +102,13 @@ function App() {
       name: "не загружено...",
       email: "не загружено...",
     });
+    setMessage("Вы вышли из приложения");
   };
 
   return (
     <CurrentUserContext.Provider value={value}>
       <div className="page">
-        <InfoTooltip isOpen={true} error={true}/>
+        <InfoTooltip closeAndClear={clearErrorAndMessage} message={message} error={errorMessage} />
         <Routes>
           <Route
             path="/"
