@@ -26,12 +26,21 @@
   border-bottom-color: var(--accent-blue);
 }
 
+.greeting-form__input:invalid {
+  border-bottom-color: #EE3465;
+}
+
+.greeting-form__input:invalid:placeholder-shown {
+  border-bottom-color: #424242;
+}
+
 .greeting-form__input-error {
   font-size: 10px;
   font-weight: 400;
   line-height: 1.2;
   color: #EE3465;
   visibility: hidden;
+  min-height: 12px;
 }
 
 .greeting-form__input-error_active {
