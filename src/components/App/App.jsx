@@ -172,6 +172,7 @@ function App() {
                     errorMessage={errorMessage}
                     onSignOut={handleSignOut}
                     setErrorMessage={setErrorMessage}
+                    inputError={'ошибка'}
                   />
                 </>
               }

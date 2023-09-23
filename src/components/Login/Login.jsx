@@ -20,8 +20,8 @@ function Login({ onLogin }) {
     <main className="login greeting-form">
       <LogoLink/>
       <GreetingForm greeting={'Рады видеть!'} question={'Ещё не зарегистрированы?'} button={'Войти'} link={{route:'/signup', text:'Регистрация'}} onSubmit={onSubmit}>
-        <InputWithLabel inputName={'email'} handleChange={handleChange} label={'E-mail'} type={'email'}/>
-        <InputWithLabel inputName={'password'} handleChange={handleChange} label={'Пароль'} type={'password'} minLength={4} maxLength={30}/>
+        <InputWithLabel inputName={'email'} handleChange={handleChange} label={'E-mail'} type={'email'} errorMessage={'типа ошибка'}/>
+        <InputWithLabel inputName={'password'} handleChange={handleChange} label={'Пароль'} type={'password'} minLength={4} maxLength={30} errorMessage={'типа ошибка'}/>
       </GreetingForm>
     </main>
   );

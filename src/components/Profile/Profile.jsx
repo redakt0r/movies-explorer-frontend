@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import "./Profile.css";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { useContext, useState } from 'react';
-import useForm from '../../hooks/useForm';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Profile({ handleEditUser, errorMessage, onSignOut }) {
+function Profile({ handleEditUser, errorMessage, onSignOut, inputError }) {
   const { currentUser } = useContext(CurrentUserContext);
-  const { values, handleChange } = useForm({
+
+  const { values, handleChange, errors } = useFormWithValidation({
     name: currentUser.name,
     email: currentUser.email,
   });
@@ -28,12 +29,14 @@ function Profile({ handleEditUser, errorMessage, onSignOut }) {
           <div className='profile__inputs'>
             <label className="profile__label">
               Имя
-              <input name='name' value={values.name} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="text" required placeholder="Имя" minLength={2} maxLength={20}/>
+              <input pattern='^[A-Za-zА-Яа-я\sё\-]*$' name='name' value={values.name} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="text" required placeholder="Имя" minLength={2} maxLength={30}/>
             </label>
+            <span className={`profile__input-error ${inputError ? 'profile__input-error_active' : ''}`}>{errors.name}</span>
             <label className="profile__label">
               E-&nbsp;mail
-              <input name='email' value={values.email} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="email" required placeholder="E-mail"/>
+              <input pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' name='email' value={values.email} onChange={handleChange} disabled={!isEditMode} className="profile__input" type="email" required placeholder="E-mail"/>
             </label>
+            <span className={`profile__input-error ${inputError ? 'profile__input-error_active' : ''}`}>{errors.email}</span>
           </div>
           {!isEditMode ?
             <button className="link profile__edit-button" type="button" aria-label="Редактировать" onClick={() => setEditMode(true)}>Редактировать</button>
