@@ -72,6 +72,10 @@
   border-bottom-color: var(--accent-blue);
 }
 
+.profile__label:has(.profile__input:invalid) {
+  border-bottom-color: #ee3465;
+}
+
 .profile__edit-button {
   padding: 0;
   font-size: 13px;
