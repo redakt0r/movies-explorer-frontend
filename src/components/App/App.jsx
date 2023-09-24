@@ -24,14 +24,14 @@ function App() {
     name: "не загружено...",
     email: "не загружено...",
   });
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
   const value = { currentUser, setCurrentUser };
   const navigate = useNavigate();
 
   const clearErrorAndMessage = () => {
-    setErrorMessage('');
-    setMessage('');
-  }
+    setErrorMessage("");
+    setMessage("");
+  };
 
   useEffect(() => {
     mainApi
@@ -43,7 +43,9 @@ function App() {
         }
       })
       .catch((err) => {
-        err.then(({ message }) => setErrorMessage(message));
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
       });
   }, []);
 
@@ -52,10 +54,12 @@ function App() {
       .getMovies()
       .then((res) => {
         console.log(res);
-        localStorage.setItem('moviesList', JSON.stringify(res))
+        localStorage.setItem("moviesList", JSON.stringify(res));
       })
       .catch((err) => {
-        err.then(({ message }) => setErrorMessage(message));
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
       });
   }, []);
 
@@ -66,16 +70,14 @@ function App() {
         if (res) {
           setIsLoggedIn(true);
           setCurrentUser(res.user);
-          navigate("/", { replace: true });
-          setMessage('Вы зарегестрированы!')
+          navigate("/movies", { replace: true });
+          setMessage("Вы зарегестрированы!");
         }
       })
       .catch((err) => {
-        err.then((err) => {
-          if (err.message === "Validation failed") {
-            setErrorMessage(err.validation.body.message);
-          } else setErrorMessage(err.message);
-        });
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
       });
   };
 
@@ -86,15 +88,13 @@ function App() {
         if (res) {
           setIsLoggedIn(true);
           setCurrentUser(res.user);
-          navigate("/", { replace: true });
+          navigate("/movies", { replace: true });
         }
       })
       .catch((err) => {
-        err.then((err) => {
-          if (err.message === "Validation failed") {
-            setErrorMessage(err.validation.body.message);
-          } else setErrorMessage(err.message);
-        });
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
       });
   };
 
@@ -104,15 +104,13 @@ function App() {
       .then((res) => {
         if (res) {
           setCurrentUser(res);
-          setMessage('Данные обновлены!');
+          setMessage("Данные обновлены!");
         }
       })
       .catch((err) => {
-        err.then((err) => {
-          if (err.message === "Validation failed") {
-            setErrorMessage(err.validation.body.message);
-          } else setErrorMessage(err.message);
-        });
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
       });
   };
 
@@ -129,7 +127,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={value}>
       <div className="page">
-        <InfoTooltip closeAndClear={clearErrorAndMessage} message={message} error={errorMessage} />
+        <InfoTooltip
+          closeAndClear={clearErrorAndMessage}
+          message={message}
+          error={errorMessage}
+        />
         <Routes>
           <Route
             path="/"
@@ -172,15 +174,32 @@ function App() {
                     errorMessage={errorMessage}
                     onSignOut={handleSignOut}
                     setErrorMessage={setErrorMessage}
-                    inputError={'ошибка'}
+                    inputError={"ошибка"}
                   />
                 </>
               }
             />
           </Route>
 
-          <Route path="/signin" element={!isLoggedIn ? <Login onLogin={handleLogin}/> : <Navigate replace to="/"/>} />
-          <Route path="/signup" element={!isLoggedIn ? <Register onRegister={handleRegister}/> : <Navigate replace to="/" />}
+          <Route
+            path="/signin"
+            element={
+              !isLoggedIn ? (
+                <Login onLogin={handleLogin} />
+              ) : (
+                <Navigate replace to="/" />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              !isLoggedIn ? (
+                <Register onRegister={handleRegister} />
+              ) : (
+                <Navigate replace to="/" />
+              )
+            }
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
