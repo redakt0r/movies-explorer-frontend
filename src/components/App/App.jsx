@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -179,10 +179,8 @@ function App() {
             />
           </Route>
 
-          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-          <Route
-            path="/signup"
-            element={<Register onRegister={handleRegister} />}
+          <Route path="/signin" element={!isLoggedIn ? <Login onLogin={handleLogin}/> : <Navigate replace to="/"/>} />
+          <Route path="/signup" element={!isLoggedIn ? <Register onRegister={handleRegister}/> : <Navigate replace to="/" />}
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
