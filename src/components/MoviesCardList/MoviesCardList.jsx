@@ -18,8 +18,25 @@ function MoviesCardList({}) {
     allMovies[4],
     allMovies[5],
     allMovies[5],
+    allMovies[0],
+    allMovies[1],
+    allMovies[2],
+    allMovies[3],
+    allMovies[4],
+    allMovies[5],
+    allMovies[5],
+    allMovies[0],
+    allMovies[1],
+    allMovies[2],
+    allMovies[3],
+    allMovies[4],
+    allMovies[5],
+    allMovies[5],
   ];
-  console.log(typeof allMovies);
+
+  const handleAddMoreMovies = () => {
+
+  }
   return (
     <>
       {isLoading ? (
@@ -29,7 +46,7 @@ function MoviesCardList({}) {
           <ul className="movies-list__list">
             {moviesSample.map((movie) => {
               return <MoviesCard movie={movie} />
-            })}
+            }).slice(0, 12)}
           </ul>
           {routeWithMoreButton && (
             <button

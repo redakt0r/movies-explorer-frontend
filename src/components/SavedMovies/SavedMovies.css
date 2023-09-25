@@ -1,3 +1,9 @@
 .saved-movies {
   min-height: calc(100vh - 246px);
 }
+
+@media screen and (max-width: 520px) {
+  .saved-movies {
+    min-height: calc(100vh - 306px);
+  }
+}
