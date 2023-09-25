@@ -2,16 +2,19 @@ import { useLocation } from "react-router-dom";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import Preloader from "../Preloader/Preloader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useWindowResize from "../../hooks/useWindowResize";
 
 function MoviesCardList({}) {
-  const [moviesToRender, setMoviesToRender] = useState(12);
+  let windowWidth = useWindowResize();
+  const [moviesToRender, setMoviesToRender] = useState(
+    windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5
+  );
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const routeWithMoreButton = location.pathname === "/movies";
   const allMovies = JSON.parse(localStorage.getItem("moviesList"));
-  let windowWidth = useWindowResize();
+
   const moviesSample = [
     allMovies[0],
     allMovies[1],
@@ -36,6 +39,15 @@ function MoviesCardList({}) {
     allMovies[20],
   ];
 
+  useEffect(() => {
+    if (!routeWithMoreButton) {
+      setMoviesToRender(moviesSample.length);
+    } else {
+      let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
+      setMoviesToRender(count);
+    }
+  }, [windowWidth, routeWithMoreButton]);
+
   const handleAddMoreMovies = () => {
     const count = windowWidth > 1213 ? 3 : 2;
     setMoviesToRender((prevMoviesToRender) => {
@@ -56,7 +68,7 @@ function MoviesCardList({}) {
               })
               .slice(0, moviesToRender)}
           </ul>
-          {routeWithMoreButton && (
+          {routeWithMoreButton && moviesSample.length < moviesToRender && (
             <button
               className="button movies-list__button"
               type="button"
