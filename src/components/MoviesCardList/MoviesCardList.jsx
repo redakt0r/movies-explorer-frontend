@@ -6,7 +6,7 @@ import { useState } from "react";
 
 function MoviesCardList({}) {
   const [movies, setMovies] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const routeWithMoreButton = location.pathname === "/movies";
   const allMovies = JSON.parse(localStorage.getItem("moviesList"));
@@ -17,8 +17,9 @@ function MoviesCardList({}) {
     allMovies[3],
     allMovies[4],
     allMovies[5],
+    allMovies[5],
   ];
-  console.log(moviesSample);
+  console.log(typeof allMovies);
   return (
     <>
       {isLoading ? (
@@ -26,10 +27,9 @@ function MoviesCardList({}) {
       ) : (
         <section className="section movies-list" aria-label="Список фильмов">
           <ul className="movies-list__list">
-            <MoviesCard movie={moviesSample[0]} />
-            <MoviesCard movie={moviesSample[1]} />
-            <MoviesCard movie={moviesSample[2]} />
-            <MoviesCard movie={moviesSample[3]} />
+            {moviesSample.map((movie) => {
+              return <MoviesCard movie={movie} />
+            })}
           </ul>
           {routeWithMoreButton && (
             <button

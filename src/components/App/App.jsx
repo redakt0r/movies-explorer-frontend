@@ -53,7 +53,6 @@ function App() {
     moviesApi
       .getMovies()
       .then((res) => {
-        console.log(res);
         localStorage.setItem("moviesList", JSON.stringify(res));
       })
       .catch((err) => {
