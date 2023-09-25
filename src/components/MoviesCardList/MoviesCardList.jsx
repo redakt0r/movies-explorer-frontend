@@ -46,7 +46,7 @@ function MoviesCardList({}) {
       let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
       setMoviesToRender(count);
     }
-  }, [windowWidth, routeWithMoreButton]);
+  }, [windowWidth]);
 
   const handleAddMoreMovies = () => {
     const count = windowWidth > 1213 ? 3 : 2;
@@ -68,7 +68,7 @@ function MoviesCardList({}) {
               })
               .slice(0, moviesToRender)}
           </ul>
-          {routeWithMoreButton && moviesSample.length < moviesToRender && (
+          {routeWithMoreButton && moviesSample.length > moviesToRender && (
             <button
               className="button movies-list__button"
               type="button"
