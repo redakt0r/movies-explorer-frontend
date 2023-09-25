@@ -2,29 +2,34 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 import { useState } from "react";
 
-function SearchForm() {
-  const [searchParams, setSearchParams] = useState({movie: '', isShort: false});
-  const [searchError, setSearchError] = useState('');
+function SearchForm({ searchMovies }) {
+  const [searchParams, setSearchParams] = useState({
+    movie: "",
+    isShort: false,
+  });
+  const [searchError, setSearchError] = useState("");
 
   const handleSearchParams = (e) => {
     const target = e.target;
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
     setSearchParams({ ...searchParams, [name]: value });
-    setSearchError('');
+    setSearchError("");
   };
 
-  const search = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchParams);
     if (!searchParams.movie) {
-      setSearchError('Введите ключевое слово.')
-    } else setSearchError('')
+      setSearchError("Введите ключевое слово.");
+    } else {
+      searchMovies(searchParams);
+      setSearchError("");
+    }
   };
 
   return (
     <section className="section search-form" aria-label="Поиск фильмов">
-      <form className="search-form__form" name="search" onSubmit={search}>
+      <form className="search-form__form" name="search" onSubmit={handleSubmit}>
         <input
           className="search-form__input"
           type="text"
