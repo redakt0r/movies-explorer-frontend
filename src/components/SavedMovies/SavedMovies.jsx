@@ -3,23 +3,20 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import { useState } from "react";
 
-function SavedMovies() {
-  const [movieslist, setMoviesList] = useState(
-    JSON.parse(localStorage.getItem("moviesList"))
-  );
+function SavedMovies({savedMovies, onSaveMovie, onDeleteMovie }) {
   const [searchedMovies, setSearchedMovies] = useState([]);
 
   const searchMovies = (params) => {
     let sortedMovies = [];
     localStorage.setItem("moviesSearchParams", JSON.stringify(params));
     if (!params.isShort) {
-      let sortedMoviesRu = movieslist.filter((movie) => {
+      let sortedMoviesRu = savedMovies.filter((movie) => {
         return movie.nameRU
           .toLowerCase()
           .trim()
           .includes(params.movie.toLowerCase());
       });
-      let sortedMoviesEn = movieslist.filter((movie) => {
+      let sortedMoviesEn = savedMovies.filter((movie) => {
         return movie.nameEN
           .toLowerCase()
           .trim()
@@ -27,13 +24,13 @@ function SavedMovies() {
       });
       sortedMovies = sortedMoviesRu.concat(sortedMoviesEn);
     } else {
-      let sortedMoviesRu = movieslist.filter((movie) => {
+      let sortedMoviesRu = savedMovies.filter((movie) => {
         return (movie.duration <= 40 && movie.nameRU
           .toLowerCase()
           .trim()
           .includes(params.movie.toLowerCase()));
       });
-      let sortedMoviesEn = movieslist.filter((movie) => {
+      let sortedMoviesEn = savedMovies.filter((movie) => {
         return (movie.duration <= 40 && movie.nameEN
           .toLowerCase()
           .trim()
@@ -47,7 +44,7 @@ function SavedMovies() {
   return (
       <main className='saved-movies'>
         <SearchForm searchMovies={searchMovies} />
-        <MoviesCardList searchedMovies={searchedMovies} />
+        <MoviesCardList searchedMovies={searchedMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} />
       </main>
   );
 }

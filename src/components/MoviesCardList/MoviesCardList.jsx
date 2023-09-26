@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import { useEffect, useState } from "react";
 import useWindowResize from "../../hooks/useWindowResize";
 
-function MoviesCardList({searchedMovies}) {
+function MoviesCardList({searchedMovies, onSaveMovie, onDeleteMovie}) {
   let windowWidth = useWindowResize();
   const [moviesToRender, setMoviesToRender] = useState(
     windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5
@@ -39,7 +39,7 @@ function MoviesCardList({searchedMovies}) {
           <ul className="movies-list__list">
             {searchedMovies
               .map((movie) => {
-                return <MoviesCard movie={movie} />;
+                return <MoviesCard movie={movie} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie}/>;
               })
               .slice(0, moviesToRender)}
           </ul>

@@ -25,6 +25,7 @@ function App() {
     email: "не загружено...",
   });
   const [message, setMessage] = useState("");
+  const [savedMovies, setSavedMovies] = useState([]);
   const value = { currentUser, setCurrentUser };
   const navigate = useNavigate();
 
@@ -53,7 +54,16 @@ function App() {
     moviesApi
       .getMovies()
       .then((res) => {
-        localStorage.setItem("moviesList", JSON.stringify(res));
+        const fullMoviesList = res.map((movie) => {
+          return {
+            ...movie,
+            image: `https://api.nomoreparties.co${movie.image.url}`,
+            thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+          }
+        })
+        localStorage.setItem("fullMoviesList", JSON.stringify(fullMoviesList));
+        console.log(res)
+        console.log(fullMoviesList)
       })
       .catch((err) => {
         if (err.message === "Failed to fetch") {
@@ -123,6 +133,32 @@ function App() {
     setMessage("Вы вышли из приложения");
   };
 
+  const saveMovie = (movie) => {
+    mainApi.saveMovie(movie)
+      .then((res) => {
+        setSavedMovies([...savedMovies, {...res, id: res.movieId}])
+        console.log(savedMovies)
+      })
+      .catch((err) => {
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
+      });
+  }
+
+  const deleteMovie = (movie) => {
+    const id = savedMovies.find(item => item.id === movie.id)._id;
+    mainApi.deleteMovie(id)
+      .then(() => {
+        setSavedMovies(previousSavedMovies => previousSavedMovies.filter(item => item._id !== id))
+      })
+      .catch((err) => {
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={value}>
       <div className="page">
@@ -148,7 +184,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <Movies />
+                  <Movies onSaveMovie={saveMovie} onDeleteMovie={deleteMovie} />
                   <Footer />
                 </>
               }
@@ -158,7 +194,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <SavedMovies />
+                  <SavedMovies onDeleteMovie={deleteMovie} savedMovies={savedMovies}/>
                   <Footer />
                 </>
               }

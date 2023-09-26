@@ -1,22 +1,21 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 import "./MoviesCard.css";
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, onDeleteMovie, onSaveMovie, isSaved }) {
   const location = useLocation();
-  const [isSaved, setIsSaved] = useState(false);
-  const saveMovie = () => {
-    setIsSaved(true);
-  };
+
+  const handleClick = () => {
+    if (isSaved) {
+      onDeleteMovie(movie);
+    } else {
+      onSaveMovie(movie);
+    }
+  }
 
   const routeWithSavedList = location.pathname === "/saved-movies";
 
   const movieDuration = (duration) => {
     return `${Math.floor(duration / 60)}ч ${duration % 60}м`;
-  };
-
-  const fullCoverUrl = (url) => {
-    return "https://api.nomoreparties.co/." + url;
   };
 
   return (
@@ -31,7 +30,7 @@ function MoviesCard({ movie }) {
         <a href={movie.trailerLink} target="blank">
           <img
             className="movies-card__cover"
-            src={fullCoverUrl(movie.image.url)}
+            src={movie.image}
             alt={`Обложка фильма '${movie.nameRU}'`}
           />
         </a>
@@ -40,6 +39,7 @@ function MoviesCard({ movie }) {
             className="button movies-card__button movies-card__button_in-list"
             type="button"
             aria-label="Удалить"
+            onClick={onDeleteMovie}
           ></button>
         ) : (
           <button
@@ -48,7 +48,7 @@ function MoviesCard({ movie }) {
             }`}
             type="button"
             aria-label={isSaved ? "Фильм сохранен" : "Сохранить"}
-            onClick={saveMovie}
+            onClick={handleClick}
           >
             {isSaved ? "" : "Сохранить"}
           </button>
