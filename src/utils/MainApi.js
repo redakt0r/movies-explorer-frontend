@@ -1,7 +1,7 @@
 import { AUTH_API_CONFIG } from "../constants/constants";
 
 class MainApi {
-  constructor({baseUrl, headers}) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
@@ -22,8 +22,8 @@ class MainApi {
         name: name,
         email: email,
         password: password,
-      })
-    }).then((res) => this._checkResponse(res))
+      }),
+    }).then((res) => this._checkResponse(res));
   }
 
   getUserInfo() {
@@ -35,7 +35,7 @@ class MainApi {
     }).then((res) => this._checkResponse(res));
   }
 
-  signIn( email, password) {
+  signIn(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       credentials: "include",
@@ -43,8 +43,8 @@ class MainApi {
       body: JSON.stringify({
         email: email,
         password: password,
-      })
-    }).then((res) => this._checkResponse(res))
+      }),
+    }).then((res) => this._checkResponse(res));
   }
 
   signOut() {
@@ -62,10 +62,61 @@ class MainApi {
       body: JSON.stringify({
         name: name,
         email: email,
-      })
-    }).then((res) => this._checkResponse(res))
+      }),
+    }).then((res) => this._checkResponse(res));
   }
 
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => this._checkResponse(res));
+  }
+
+  saveMovie({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+    owner,
+  }) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      credentials: "include",
+      headers: this._headers,
+      body: JSON.stringify({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailerLink,
+        thumbnail,
+        movieId,
+        nameRU,
+        nameEN,
+        owner,
+      }),
+    }).then((res) => this._checkResponse(res));
+  }
+
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: this._headers,
+    }).then((res) => this._checkResponse(res));
+  }
 }
 
 export const mainApi = new MainApi(AUTH_API_CONFIG);

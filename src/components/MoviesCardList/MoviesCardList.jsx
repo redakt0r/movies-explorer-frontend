@@ -16,7 +16,7 @@ function MoviesCardList({searchedMovies}) {
 
   useEffect(() => {
     if (!routeWithMoreButton) {
-      setMoviesToRender(searchedMovies.length);
+      setMoviesToRender(100);
     } else {
       let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
       setMoviesToRender(count);

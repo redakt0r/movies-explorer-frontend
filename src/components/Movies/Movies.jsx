@@ -43,10 +43,7 @@ function Movies() {
     }
     localStorage.setItem("searchedMovies", JSON.stringify(sortedMovies));
     setSearchedMovies(sortedMovies);
-    console.log(sortedMovies);
   };
-
-  console.log(JSON.parse(localStorage.getItem("moviesList")));
   return (
     <main className="movies">
       <SearchForm searchMovies={searchMovies} />
