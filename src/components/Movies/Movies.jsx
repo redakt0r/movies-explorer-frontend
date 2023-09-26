@@ -1,29 +1,56 @@
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import './Movies.css';
-import { useState } from 'react';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import "./Movies.css";
+import { useState } from "react";
 
 function Movies() {
-  const [movieslist, setMoviesList] = useState(JSON.parse(localStorage.getItem('moviesList')));
-  const [searchedMovies, setSearchedMovies] = useState([])
+  const [movieslist, setMoviesList] = useState(
+    JSON.parse(localStorage.getItem("moviesList"))
+  );
+  const [searchedMovies, setSearchedMovies] = useState([]);
 
-  const searchMovies = (parapms) => {
+  const searchMovies = (params) => {
     let sortedMovies = [];
-    localStorage.setItem('moviesSearchParams', JSON.stringify(parapms));
-    sortedMovies = movieslist.filter((movie) => {
-      return movie.nameRU.toLowerCase().trim().includes(parapms.movie.toLowerCase())
-    })
-    localStorage.setItem('searchedMovies', JSON.stringify(sortedMovies));
-    setSearchedMovies(sortedMovies)
-    console.log(sortedMovies)
-  }
+    localStorage.setItem("moviesSearchParams", JSON.stringify(params));
+    if (!params.isShort) {
+      let sortedMoviesRu = movieslist.filter((movie) => {
+        return movie.nameRU
+          .toLowerCase()
+          .trim()
+          .includes(params.movie.toLowerCase());
+      });
+      let sortedMoviesEn = movieslist.filter((movie) => {
+        return movie.nameEN
+          .toLowerCase()
+          .trim()
+          .includes(params.movie.toLowerCase());
+      });
+      sortedMovies = sortedMoviesRu.concat(sortedMoviesEn);
+    } else {
+      let sortedMoviesRu = movieslist.filter((movie) => {
+        return (movie.duration <= 40 && movie.nameRU
+          .toLowerCase()
+          .trim()
+          .includes(params.movie.toLowerCase()));
+      });
+      let sortedMoviesEn = movieslist.filter((movie) => {
+        return (movie.duration <= 40 && movie.nameEN
+          .toLowerCase()
+          .trim()
+          .includes(params.movie.toLowerCase()));
+      });
+      sortedMovies = sortedMoviesRu.concat(sortedMoviesEn);
+    }
+    localStorage.setItem("searchedMovies", JSON.stringify(sortedMovies));
+    setSearchedMovies(sortedMovies);
+    console.log(sortedMovies);
+  };
 
-
-  console.log(JSON.parse(localStorage.getItem("moviesList")))
+  console.log(JSON.parse(localStorage.getItem("moviesList")));
   return (
-    <main className='movies'>
-      <SearchForm searchMovies={searchMovies}/>
-      <MoviesCardList searchedMovies={searchedMovies}/>
+    <main className="movies">
+      <SearchForm searchMovies={searchMovies} />
+      <MoviesCardList searchedMovies={searchedMovies} />
     </main>
   );
 }
