@@ -9,6 +9,26 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
   );
   const [searchedMovies, setSearchedMovies] = useState([]);
 
+/*   moviesApi
+      .getMovies()
+      .then((res) => {
+        const fullMoviesList = res.map((movie) => {
+          return {
+            ...movie,
+            image: `https://api.nomoreparties.co${movie.image.url}`,
+            thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+          }
+        })
+        localStorage.setItem("fullMoviesList", JSON.stringify(fullMoviesList));
+        console.log(res)
+        console.log(fullMoviesList)
+      })
+      .catch((err) => {
+        if (err.message === "Failed to fetch") {
+          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+        } else setErrorMessage(err.message);
+      }); */
+
   const searchMovies = (params) => {
     let sortedMovies = [];
     localStorage.setItem("moviesSearchParams", JSON.stringify(params));

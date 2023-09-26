@@ -15,7 +15,6 @@ import Footer from "../Footer/Footer";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { mainApi } from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { moviesApi } from "../../utils/MoviesApi";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,7 +25,6 @@ function App() {
   });
   const [message, setMessage] = useState("");
   const [savedMovies, setSavedMovies] = useState([]);
-  const value = { currentUser, setCurrentUser };
   const navigate = useNavigate();
 
   const clearErrorAndMessage = () => {
@@ -42,28 +40,6 @@ function App() {
           setIsLoggedIn(true);
           setCurrentUser(res.user);
         }
-      })
-      .catch((err) => {
-        if (err.message === "Failed to fetch") {
-          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
-      });
-  }, []);
-
-  useEffect(() => {
-    moviesApi
-      .getMovies()
-      .then((res) => {
-        const fullMoviesList = res.map((movie) => {
-          return {
-            ...movie,
-            image: `https://api.nomoreparties.co${movie.image.url}`,
-            thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-          }
-        })
-        localStorage.setItem("fullMoviesList", JSON.stringify(fullMoviesList));
-        console.log(res)
-        console.log(fullMoviesList)
       })
       .catch((err) => {
         if (err.message === "Failed to fetch") {
@@ -131,6 +107,7 @@ function App() {
       email: "не загружено...",
     });
     setMessage("Вы вышли из приложения");
+    localStorage.clear();
   };
 
   const saveMovie = (movie) => {
@@ -160,7 +137,7 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={value}>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <InfoTooltip
           closeAndClear={clearErrorAndMessage}
