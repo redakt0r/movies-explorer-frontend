@@ -5,12 +5,11 @@ import Preloader from "../Preloader/Preloader";
 import { useEffect, useState } from "react";
 import useWindowResize from "../../hooks/useWindowResize";
 
-function MoviesCardList({searchedMovies, onSaveMovie, onDeleteMovie}) {
+function MoviesCardList({searchedMovies, onSaveMovie, onDeleteMovie, isLoading}) {
   let windowWidth = useWindowResize();
   const [moviesToRender, setMoviesToRender] = useState(
     windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5
   );
-  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const routeWithMoreButton = location.pathname === "/movies";
 

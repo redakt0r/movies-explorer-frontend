@@ -2,37 +2,47 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
 import { useState } from "react";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function Movies({ onSaveMovie, onDeleteMovie }) {
-  const [fullMoviesList, setfullMoviesList] = useState(
-    JSON.parse(localStorage.getItem("fullMoviesList"))
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [fullMoviesList, setfullMoviesList] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [isShort, setIsShort] = useState(false);
 
-/*   moviesApi
-      .getMovies()
-      .then((res) => {
-        const fullMoviesList = res.map((movie) => {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  async function searchMovies(text, isChecked = false) {
+    setIsLoading(true);
+    setIsShort(isChecked);
+    setSearchText(text);
+    console.log(text);
+    console.log(isChecked);
+
+    try {
+      await moviesApi.getMovies().then((movies) => {
+        console.log(movies);
+        setfullMoviesList(movies.map((movie) => {
           return {
             ...movie,
             image: `https://api.nomoreparties.co${movie.image.url}`,
             thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+            movieId: movie.id,
           }
-        })
-        localStorage.setItem("fullMoviesList", JSON.stringify(fullMoviesList));
-        console.log(res)
-        console.log(fullMoviesList)
+        }))
       })
-      .catch((err) => {
-        if (err.message === "Failed to fetch") {
-          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
-      }); */
 
-  const searchMovies = (params) => {
-    let sortedMovies = [];
-    localStorage.setItem("moviesSearchParams", JSON.stringify(params));
-    if (!params.isShort) {
+    } catch (err) {
+      if (err.message === "Failed to fetch") {
+        setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+      } else setErrorMessage(err.message);
+    } finally {
+      setIsLoading(false);
+      console.log(fullMoviesList);
+    };
+
+/*     if (!params.isShort) {
       let sortedMoviesRu = fullMoviesList.filter((movie) => {
         return movie.nameRU
           .toLowerCase()
@@ -64,12 +74,13 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
     localStorage.setItem("searchedMovies", JSON.stringify(sortedMovies));
     setSearchedMovies(sortedMovies);
     console.log(sortedMovies)
-    console.log(localStorage)
+    console.log(localStorage) */
   };
+
   return (
     <main className="movies">
-      <SearchForm searchMovies={searchMovies} />
-      <MoviesCardList searchedMovies={searchedMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} />
+      <SearchForm searchMovies={searchMovies} setSearchText={setSearchText}/>
+      <MoviesCardList isLoading={isLoading} searchedMovies={searchedMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} />
     </main>
   );
 }

@@ -2,13 +2,17 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 import { useState } from "react";
 
-function SearchForm({ searchMovies }) {
+function SearchForm({ searchMovies, setSearchText }) {
   const [searchParams, setSearchParams] = useState({
     movie: "",
     isShort: false,
   });
   const [searchError, setSearchError] = useState("");
+  const [text, setText] = useState('');
 
+  const handleSearchText = (e) => {
+    setText(e.target.value.trim())
+  }
   const handleSearchParams = (e) => {
     const target = e.target;
     const name = target.name;
@@ -19,10 +23,10 @@ function SearchForm({ searchMovies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!searchParams.movie) {
+    if (!text) {
       setSearchError("Введите ключевое слово.");
     } else {
-      searchMovies(searchParams);
+      searchMovies(text);
       setSearchError("");
     }
   };
@@ -35,7 +39,7 @@ function SearchForm({ searchMovies }) {
           type="text"
           name="movie"
           placeholder="Фильм"
-          onChange={handleSearchParams}
+          onChange={handleSearchText}
         />
         <button
           className="button search-form__button"
