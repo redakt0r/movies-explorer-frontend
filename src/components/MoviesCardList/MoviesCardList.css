@@ -31,6 +31,14 @@
   width: 100%;
 }
 
+.movies-list__error {
+  margin: 0 auto;
+  padding-top: 50px;
+  font-size: 20px;
+  line-height: 1.1;
+  text-align: center;
+}
+
 @media screen and (max-width: 860px) {
   .movies-list__list {
     grid-template-columns: repeat(auto-fit, minmax(342px, 1fr));

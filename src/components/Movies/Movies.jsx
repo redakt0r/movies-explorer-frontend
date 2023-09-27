@@ -13,6 +13,15 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const isMovieShort = (movie, isChecked) => {
+    if (isChecked) {
+      return movie.duration <= 40;
+    } else if (!isChecked) {
+      return true
+    }
+    return false;
+  }
+
   async function searchMovies(text, isChecked = false) {
     setIsLoading(true);
     setIsShort(isChecked);
@@ -20,11 +29,11 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
     console.log(text);
     console.log(isChecked);
 
-    let movies;
+
     let moviesInFormat;
     try {
-      movies = await moviesApi.getMovies();
-      moviesInFormat = await movies.map((movie) => {
+      let allMovies = await moviesApi.getMovies();
+      moviesInFormat = await allMovies.map((movie) => {
         return {
           ...movie,
           image: `https://api.nomoreparties.co${movie.image.url}`,
@@ -39,51 +48,22 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
         );
       } else setErrorMessage(err.message);
     }
-
-    const filtered = moviesInFormat.filter((movie) => {
-      return movie.nameRU.toLowerCase().trim().includes(text.toLowerCase());
+    const namesFiltered = await moviesInFormat.filter((movie) => {
+      isMovieShort(movie, isChecked)
+      return movie.nameRU.toLowerCase().trim().includes(text.toLowerCase()) ||
+        movie.nameEN.toLowerCase().trim().includes(text.toLowerCase());
     });
+    const filtered = namesFiltered.filter((movie) => {
+      return isMovieShort(movie, isChecked)
+    })
 
     console.log(fullMoviesList);
+    console.log(namesFiltered);
     console.log(filtered);
     setSearchedMovies(filtered);
     setIsLoading(false);
     console.log(searchedMovies);
   }
-
-  /*     if (!params.isShort) {
-      let sortedMoviesRu = fullMoviesList.filter((movie) => {
-        return movie.nameRU
-          .toLowerCase()
-          .trim()
-          .includes(params.movie.toLowerCase());
-      });
-      let sortedMoviesEn = fullMoviesList.filter((movie) => {
-        return movie.nameEN
-          .toLowerCase()
-          .trim()
-          .includes(params.movie.toLowerCase());
-      });
-      sortedMovies = sortedMoviesRu.concat(sortedMoviesEn);
-    } else {
-      let sortedMoviesRu = fullMoviesList.filter((movie) => {
-        return (movie.duration <= 40 && movie.nameRU
-          .toLowerCase()
-          .trim()
-          .includes(params.movie.toLowerCase()));
-      });
-      let sortedMoviesEn = fullMoviesList.filter((movie) => {
-        return (movie.duration <= 40 && movie.nameEN
-          .toLowerCase()
-          .trim()
-          .includes(params.movie.toLowerCase()));
-      });
-      sortedMovies = sortedMoviesRu.concat(sortedMoviesEn);
-    }
-    localStorage.setItem("searchedMovies", JSON.stringify(sortedMovies));
-    setSearchedMovies(sortedMovies);
-    console.log(sortedMovies)
-    console.log(localStorage) */
 
   return (
     <main className="movies">
