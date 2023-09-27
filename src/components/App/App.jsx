@@ -110,33 +110,7 @@ function App() {
     localStorage.clear();
   };
 
-  const saveMovie = (movie) => {
-    mainApi.saveMovie(movie)
-      .then((res) => {
-        setSavedMovies([...savedMovies, {...res, id: res.movieId}])
-        console.log(savedMovies)
-      })
-      .catch((err) => {
-        if (err.message === "Failed to fetch") {
-          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
-      });
-  }
-
-  const deleteMovie = (movie) => {
-    const id = savedMovies.find(item => item.id === movie.id)._id;
-    mainApi.deleteMovie(id)
-      .then(() => {
-        setSavedMovies(previousSavedMovies => previousSavedMovies.filter(item => item._id !== id))
-      })
-      .catch((err) => {
-        if (err.message === "Failed to fetch") {
-          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
-      });
-  }
-
-  return (
+    return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <InfoTooltip
@@ -161,7 +135,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <Movies onSaveMovie={saveMovie} onDeleteMovie={deleteMovie} />
+                  <Movies /* onSaveMovie={saveMovie} */ /* onDeleteMovie={deleteMovie} */ />
                   <Footer />
                 </>
               }
@@ -171,7 +145,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <SavedMovies onDeleteMovie={deleteMovie} savedMovies={savedMovies}/>
+                  <SavedMovies /* onDeleteMovie={deleteMovie} */ savedMovies={savedMovies}/>
                   <Footer />
                 </>
               }

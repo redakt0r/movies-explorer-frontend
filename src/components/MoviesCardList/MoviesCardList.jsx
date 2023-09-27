@@ -47,6 +47,7 @@ function MoviesCardList({
                 .map((movie) => {
                   return (
                     <MoviesCard
+                      key={movie.id || movie._id}
                       movie={movie}
                       onSaveMovie={onSaveMovie}
                       onDeleteMovie={onDeleteMovie}

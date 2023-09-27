@@ -1,14 +1,18 @@
 import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
+import { useState } from "react";
 
-function MoviesCard({ movie, onDeleteMovie, onSaveMovie, isSaved }) {
+function MoviesCard({ movie, onDeleteMovie, onSaveMovie }) {
+  const [isSaved, setIsSaved] = useState(movie.saved)
   const location = useLocation();
 
   const handleClick = () => {
     if (isSaved) {
       onDeleteMovie(movie);
+      setIsSaved(false)
     } else {
       onSaveMovie(movie);
+      setIsSaved(true)
     }
   }
 
