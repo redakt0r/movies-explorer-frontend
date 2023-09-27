@@ -8,6 +8,8 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
   const [isLoading, setIsLoading] = useState(false);
   const [fullMoviesList, setfullMoviesList] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [namesFilteredMovies, setNamesFilteredMovies] = useState([])
+  const [notFoundError, setNotFoundError] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isShort, setIsShort] = useState(false);
 
@@ -15,7 +17,7 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
 
   const isMovieShort = (movie, isChecked) => {
     if (isChecked) {
-      return movie.duration <= 40;
+      return movie.duration <= 46;
     } else if (!isChecked) {
       return true
     }
@@ -28,7 +30,6 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
     setSearchText(text);
     console.log(text);
     console.log(isChecked);
-
 
     let moviesInFormat;
     try {
@@ -48,6 +49,7 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
         );
       } else setErrorMessage(err.message);
     }
+
     const namesFiltered = await moviesInFormat.filter((movie) => {
       isMovieShort(movie, isChecked)
       return movie.nameRU.toLowerCase().trim().includes(text.toLowerCase()) ||
@@ -56,23 +58,35 @@ function Movies({ onSaveMovie, onDeleteMovie }) {
     const filtered = namesFiltered.filter((movie) => {
       return isMovieShort(movie, isChecked)
     })
+    if (filtered.length === 0) {
+      setNotFoundError(true)
+    } else setNotFoundError(false)
 
     console.log(fullMoviesList);
     console.log(namesFiltered);
     console.log(filtered);
+    setNamesFilteredMovies(namesFiltered);
     setSearchedMovies(filtered);
     setIsLoading(false);
     console.log(searchedMovies);
   }
 
+  const handleCheckbox = (namesFilteredMovies, isChecked) => {
+    const filtered = namesFilteredMovies.filter((movie) => {
+      return isMovieShort(movie, isChecked)
+    })
+    setSearchedMovies(filtered);
+  }
+
   return (
     <main className="movies">
-      <SearchForm searchMovies={searchMovies} setSearchText={setSearchText} />
+      <SearchForm namesFilteredMovies={namesFilteredMovies} searchMovies={searchMovies} setSearchText={setSearchText} handleCheckbox={handleCheckbox} />
       <MoviesCardList
         isLoading={isLoading}
         searchedMovies={searchedMovies}
         onSaveMovie={onSaveMovie}
         onDeleteMovie={onDeleteMovie}
+        notFoundError={notFoundError}
       />
     </main>
   );

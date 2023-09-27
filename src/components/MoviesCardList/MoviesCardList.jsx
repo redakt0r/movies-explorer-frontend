@@ -10,6 +10,7 @@ function MoviesCardList({
   onSaveMovie,
   onDeleteMovie,
   isLoading,
+  notFoundError,
 }) {
   let windowWidth = useWindowResize();
   const [moviesToRender, setMoviesToRender] = useState(
@@ -40,7 +41,7 @@ function MoviesCardList({
         <Preloader />
       ) : (
         <section className="section movies-list" aria-label="Список фильмов">
-          {searchedMovies.length !== 0 ? (
+          {!notFoundError ? (
             <ul className="movies-list__list">
               {searchedMovies
                 .map((movie) => {
