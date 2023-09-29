@@ -4,4 +4,6 @@
 
 Ссылка на проект https://groovy-movie.nomoredomainsicu.ru/
 
+Ссылка на Pull request https://github.com/redakt0r/movies-explorer-frontend/pull/2
+
 Прошу прощения за настолько сырую работу. Пытаюсь успеть к дедлайну.
