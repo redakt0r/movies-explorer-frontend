@@ -6,13 +6,13 @@ function MoviesCard({ movie, onDeleteMovie, onSaveMovie }) {
   const [isSaved, setIsSaved] = useState(movie.saved)
   const location = useLocation();
 
-  const handleClick = () => {
+  async function handleClick() {
     if (isSaved) {
-      onDeleteMovie(movie);
-      setIsSaved(false)
+      await onDeleteMovie(movie);
+      setIsSaved(!isSaved)
     } else {
-      onSaveMovie(movie);
-      setIsSaved(true)
+      await onSaveMovie(movie);
+      setIsSaved(!isSaved)
     }
   }
 

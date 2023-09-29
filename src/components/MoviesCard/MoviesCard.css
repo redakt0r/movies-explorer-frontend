@@ -35,6 +35,10 @@
   font-weight: 500;
   line-height: 1.2;
   padding-left: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 280px;
 }
 
 .movies-card__duration {

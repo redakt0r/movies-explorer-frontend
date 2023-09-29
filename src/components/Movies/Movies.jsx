@@ -90,7 +90,11 @@ function Movies() {
       .saveMovie(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
-        console.log("savedMovies");
+        console.log("savedMovies до");
+        console.log(savedMovies);
+      })
+      .then((res) => {
+        console.log("savedMovies после");
         console.log(savedMovies);
       })
       .catch((err) => {
@@ -104,21 +108,26 @@ function Movies() {
 
   const onDeleteMovie = (movie) => {
     console.log(movie);
-    console.log(savedMovies)
-    const id = savedMovies.find(item => item.id == movie.id)._id;
-    mainApi.deleteMovie(id)
-      .then(() => {
-        setSavedMovies(previousSavedMovies => previousSavedMovies.filter(item => item._id !== id))
+    console.log(savedMovies);
+    const id = savedMovies.find((item) => item.id === movie.id)._id;
+    mainApi
+      .deleteMovie(id)
+      .then((res) => {
+        setSavedMovies((previousSavedMovies) => previousSavedMovies.filter((item) => item._id !== id));
       })
       .catch((err) => {
         if (err.message === "Failed to fetch") {
-          setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
+          console.log(err);
+          setErrorMessage(
+            "Сервер недоступен. Проверьте интернет соединение или повторите попытку позже."
+          );
         } else setErrorMessage(err.message);
-      });
-  }
+      })
+      .finally(() => console.log(savedMovies));
+  };
 
   const filterSavedMovies = (movie, moviesList) => {
-    return moviesList.find((item) => item.movieId == movie.id);
+    return moviesList.find((item) => item.movieId === movie.id) ? true : false;
   };
 
   const markedAsSaveMoviesToRender = searchedMovies.map((movie) => ({

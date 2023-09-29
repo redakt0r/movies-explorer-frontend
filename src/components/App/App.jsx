@@ -24,7 +24,6 @@ function App() {
     email: "не загружено...",
   });
   const [message, setMessage] = useState("");
-  const [savedMovies, setSavedMovies] = useState([]);
   const navigate = useNavigate();
 
   const clearErrorAndMessage = () => {
@@ -135,7 +134,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <Movies /* onSaveMovie={saveMovie} */ /* onDeleteMovie={deleteMovie} */ />
+                  <Movies />
                   <Footer />
                 </>
               }
@@ -145,7 +144,7 @@ function App() {
               element={
                 <>
                   <Header isLoggedIn={isLoggedIn} />
-                  <SavedMovies /* onDeleteMovie={deleteMovie} */ savedMovies={savedMovies}/>
+                  <SavedMovies />
                   <Footer />
                 </>
               }
