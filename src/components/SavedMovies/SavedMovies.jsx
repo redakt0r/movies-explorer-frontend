@@ -10,20 +10,29 @@ function SavedMovies() {
   const [notFoundError, setNotFoundError] = useState("");
   const [searchText, setSearchText] = useState("");
   const [isShort, setIsShort] = useState(false);
-  const [searchedMovies, setSearchedMovies] = useState([]);
-  const [namesFilteredMovies, setNamesFilteredMovies] = useState(moviesToRender);
+  // const [searchedMovies, setSearchedMovies] = useState([]);
+  const [namesFilteredMovies, setNamesFilteredMovies] =
+    useState(moviesToRender);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    mainApi.getSavedMovies().then((movies) => {
-      if (movies.length === 0) {
-        setNotFoundError("Здесь будут ваши сохраненные фильмы");
-      } else {
-        setMoviesToRender(movies);
-        setSavedMovies(movies);
-        setNamesFilteredMovies(movies);
-        setNotFoundError("");
-      }
-    });
+    const savedMoviesFromStorage = localStorage.getItem("SavedMovies");
+    if (savedMoviesFromStorage) {
+      setSavedMovies(JSON.parse(savedMoviesFromStorage));
+      setMoviesToRender(JSON.parse(savedMoviesFromStorage));
+    } else {
+      mainApi.getSavedMovies().then((movies) => {
+        if (movies.length === 0) {
+          setNotFoundError("Здесь будут ваши сохраненные фильмы");
+        } else {
+          setMoviesToRender(movies);
+          setSavedMovies(movies);
+          setNamesFilteredMovies(movies);
+          setNotFoundError("");
+        }
+      });
+    }
   }, [setMoviesToRender]);
 
   const isMovieShort = (movie, isChecked) => {
@@ -45,7 +54,7 @@ function SavedMovies() {
         movie.nameRU.toLowerCase().trim().includes(text.toLowerCase()) ||
         movie.nameEN.toLowerCase().trim().includes(text.toLowerCase())
       );
-    })
+    });
     const filtered = namesFiltered.filter((movie) => {
       return isMovieShort(movie, isChecked);
     });
@@ -53,7 +62,7 @@ function SavedMovies() {
       setNotFoundError("Ничего не найдено");
     } else setNotFoundError("");
     setNamesFilteredMovies(namesFiltered);
-    setSearchedMovies(filtered);
+    // setSearchedMovies(filtered);
     setMoviesToRender(filtered);
   };
 
@@ -66,8 +75,34 @@ function SavedMovies() {
     } else {
       setNotFoundError("");
     }
-    setSearchedMovies(filtered);
+    // setSearchedMovies(filtered);
     setMoviesToRender(filtered);
+  };
+
+  const onDeleteMovie = (movie) => {
+    const id = savedMovies.find((item) => item.id === movie.id)._id;
+    mainApi
+      .deleteMovie(id)
+      .then((res) => {
+        setSavedMovies((previousSavedMovies) =>
+          previousSavedMovies.filter((item) => item._id !== id)
+        );
+        localStorage.setItem(
+          "SavedMovies",
+          JSON.stringify(savedMovies.filter((item) => item._id !== id))
+        );
+        setMoviesToRender((previousMoviesToRender) =>
+          previousMoviesToRender.filter((item) => item._id !== id)
+        );
+      })
+      .catch((err) => {
+        if (err.message === "Failed to fetch") {
+          console.log(err);
+          setErrorMessage(
+            "Сервер недоступен. Проверьте интернет соединение или повторите попытку позже."
+          );
+        } else setErrorMessage(err.message);
+      });
   };
 
   return (
@@ -77,10 +112,13 @@ function SavedMovies() {
         searchMovies={searchInSaved}
         setSearchText={setSearchText}
         handleCheckbox={handleCheckbox}
+        setIsShort={setIsShort}
+        searchText={searchText}
       />
       <MoviesCardList
         movies={moviesToRender}
-        notFoundError={notFoundError} /* onDeleteMovie={onDeleteMovie} */
+        notFoundError={notFoundError}
+        onDeleteMovie={onDeleteMovie}
       />
     </main>
   );

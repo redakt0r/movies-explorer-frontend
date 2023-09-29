@@ -26,7 +26,7 @@ function MoviesCardList({
       let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
       setMoviesToRender(count);
     }
-  }, [windowWidth]);
+  }, [windowWidth, routeWithMoreButton]);
 
   const handleAddMoreMovies = () => {
     const count = windowWidth > 1213 ? 3 : 2;

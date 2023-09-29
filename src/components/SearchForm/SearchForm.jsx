@@ -2,13 +2,11 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 import { useState } from "react";
 
-function SearchForm({ searchMovies, handleCheckbox, namesFilteredMovies }) {
+function SearchForm({ searchMovies, handleCheckbox, namesFilteredMovies, searchText, setSearchText, isShort, setIsShort }) {
   const [searchError, setSearchError] = useState("");
-  const [text, setText] = useState('');
-  const [isShort, setIsShort] = useState(false);
 
   const handleSearchText = (e) => {
-    setText(e.target.value.trim());
+    setSearchText(e.target.value.trim());
     setSearchError("");
   }
   const handleIsShort = (e) => {
@@ -18,10 +16,10 @@ function SearchForm({ searchMovies, handleCheckbox, namesFilteredMovies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text) {
+    if (!searchText) {
       setSearchError("Введите ключевое слово.");
     } else {
-      searchMovies(text, isShort);
+      searchMovies(searchText, isShort);
       setSearchError("");
     }
   };
@@ -35,6 +33,7 @@ function SearchForm({ searchMovies, handleCheckbox, namesFilteredMovies }) {
           name="movie"
           placeholder="Фильм"
           onChange={handleSearchText}
+          value={searchText}
         />
         <button
           className="button search-form__button"
@@ -44,7 +43,7 @@ function SearchForm({ searchMovies, handleCheckbox, namesFilteredMovies }) {
           Поиск
         </button>
         <span className="search-form__error">{searchError}</span>
-        <FilterCheckbox onChange={handleIsShort} />
+        <FilterCheckbox onChange={handleIsShort} isShort={isShort}/>
       </form>
     </section>
   );
