@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 const AUTH_API_CONFIG = {
-  baseUrl: "http://localhost:3000",
-  //baseUrl: "https://api.groovy-movie.nomoredomainsicu.ru",
+  //baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.groovy-movie.nomoredomainsicu.ru",
   headers: {
     "Content-Type": "application/json",
   },
