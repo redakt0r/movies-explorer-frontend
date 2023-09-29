@@ -10,7 +10,7 @@ function SavedMovies() {
   const [notFoundError, setNotFoundError] = useState("");
   const [searchText, setSearchText] = useState("");
   const [isShort, setIsShort] = useState(false);
-  // const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
   const [namesFilteredMovies, setNamesFilteredMovies] =
     useState(moviesToRender);
 
@@ -62,7 +62,7 @@ function SavedMovies() {
       setNotFoundError("Ничего не найдено");
     } else setNotFoundError("");
     setNamesFilteredMovies(namesFiltered);
-    // setSearchedMovies(filtered);
+    setSearchedMovies(filtered);
     setMoviesToRender(filtered);
   };
 
@@ -75,7 +75,7 @@ function SavedMovies() {
     } else {
       setNotFoundError("");
     }
-    // setSearchedMovies(filtered);
+    setSearchedMovies(filtered);
     setMoviesToRender(filtered);
   };
 

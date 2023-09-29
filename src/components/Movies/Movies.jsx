@@ -16,7 +16,6 @@ function Movies() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState("");
-  //localStorage.clear()
 
   useEffect(() => {
     const allMoviesFromStorage = localStorage.getItem("FullMoviesList");
@@ -66,7 +65,6 @@ function Movies() {
     setIsLoading(true);
     setIsShort(isChecked);
     localStorage.setItem("IsShort", JSON.stringify(isChecked));
-    //setSearchText(text);
 
     let moviesInFormat;
     if (fullMoviesList.length === 0) {
@@ -162,6 +160,10 @@ function Movies() {
       .then((res) => {
         setSavedMovies((previousSavedMovies) =>
           previousSavedMovies.filter((item) => item._id !== id)
+        );
+        localStorage.setItem(
+          "SavedMovies",
+          JSON.stringify(savedMovies.filter((item) => item._id !== id))
         );
       })
       .catch((err) => {
