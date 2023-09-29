@@ -10,7 +10,7 @@ function Movies() {
   const [fullMoviesList, setfullMoviesList] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [namesFilteredMovies, setNamesFilteredMovies] = useState([]);
-  const [notFoundError, setNotFoundError] = useState(false);
+  const [notFoundError, setNotFoundError] = useState("");
   const [searchText, setSearchText] = useState("");
   const [isShort, setIsShort] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -66,8 +66,8 @@ function Movies() {
       return isMovieShort(movie, isChecked);
     });
     if (filtered.length === 0) {
-      setNotFoundError(true);
-    } else setNotFoundError(false);
+      setNotFoundError("Ничего не найдено");
+    } else setNotFoundError("");
 
     console.log(namesFiltered);
     console.log(filtered);
@@ -82,6 +82,11 @@ function Movies() {
     const filtered = namesFilteredMovies.filter((movie) => {
       return isMovieShort(movie, isChecked);
     });
+    if (filtered.length === 0) {
+      setNotFoundError("Ничего не найдено");
+    } else {
+      setNotFoundError("");
+    }
     setSearchedMovies(filtered);
   };
 
@@ -113,7 +118,9 @@ function Movies() {
     mainApi
       .deleteMovie(id)
       .then((res) => {
-        setSavedMovies((previousSavedMovies) => previousSavedMovies.filter((item) => item._id !== id));
+        setSavedMovies((previousSavedMovies) =>
+          previousSavedMovies.filter((item) => item._id !== id)
+        );
       })
       .catch((err) => {
         if (err.message === "Failed to fetch") {
@@ -147,7 +154,7 @@ function Movies() {
       />
       <MoviesCardList
         isLoading={isLoading}
-        searchedMovies={markedAsSaveMoviesToRender}
+        movies={markedAsSaveMoviesToRender}
         onSaveMovie={onSaveMovie}
         onDeleteMovie={onDeleteMovie}
         notFoundError={notFoundError}

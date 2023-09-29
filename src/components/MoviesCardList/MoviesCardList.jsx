@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import useWindowResize from "../../hooks/useWindowResize";
 
 function MoviesCardList({
-  searchedMovies,
+  movies,
   onSaveMovie,
   onDeleteMovie,
   isLoading,
@@ -43,7 +43,7 @@ function MoviesCardList({
         <section className="section movies-list" aria-label="Список фильмов">
           {!notFoundError ? (
             <ul className="movies-list__list">
-              {searchedMovies
+              {movies
                 .map((movie) => {
                   return (
                     <MoviesCard
@@ -57,9 +57,9 @@ function MoviesCardList({
                 .slice(0, moviesToRender)}
             </ul>
           ) : (
-            <p className="movies-list__error">Ничего не найдено</p>
+            <p className="movies-list__error">{notFoundError}</p>
           )}
-          {routeWithMoreButton && searchedMovies.length > moviesToRender && (
+          {routeWithMoreButton && movies.length > moviesToRender && (
             <button
               className="button movies-list__button"
               type="button"
