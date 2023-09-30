@@ -1,8 +1,9 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./SavedMovies.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { mainApi } from "../../utils/MainApi";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function SavedMovies() {
   const [moviesToRender, setMoviesToRender] = useState([]);
@@ -14,7 +15,7 @@ function SavedMovies() {
   const [namesFilteredMovies, setNamesFilteredMovies] =
     useState(moviesToRender);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const { setErrorMessage } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const savedMoviesFromStorage = localStorage.getItem("SavedMovies");
@@ -79,7 +80,7 @@ function SavedMovies() {
     setMoviesToRender(filtered);
   };
 
-  const onDeleteMovie = (movie) => {
+  const onDeleteMovieInSavedMoviesRoute = (movie) => {
     const id = savedMovies.find((item) => item.id === movie.id)._id;
     mainApi
       .deleteMovie(id)
@@ -118,7 +119,7 @@ function SavedMovies() {
       <MoviesCardList
         movies={moviesToRender}
         notFoundError={notFoundError}
-        onDeleteMovie={onDeleteMovie}
+        onDeleteMovie={onDeleteMovieInSavedMoviesRoute}
       />
     </main>
   );

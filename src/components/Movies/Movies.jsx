@@ -1,9 +1,10 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./Movies.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { moviesApi } from "../../utils/MoviesApi";
 import { mainApi } from "../../utils/MainApi";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +16,7 @@ function Movies() {
   const [isShort, setIsShort] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const { setErrorMessage } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const allMoviesFromStorage = localStorage.getItem("FullMoviesList");
@@ -78,7 +79,8 @@ function Movies() {
             movieId: movie.id,
           };
         });
-      } catch (err) {
+      } catch(err) {
+        setIsLoading(false);
         if (err.message === "Failed to fetch") {
           console.log(err);
           setErrorMessage(
