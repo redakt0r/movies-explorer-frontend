@@ -43,7 +43,9 @@ function App() {
       .catch((err) => {
         if (err.message === "Failed to fetch") {
           setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
+        } else err.then((err) => {
+          setErrorMessage(err.message);
+        });
       });
   }, []);
 
@@ -61,7 +63,9 @@ function App() {
       .catch((err) => {
         if (err.message === "Failed to fetch") {
           setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
+        } else err.then((err) => {
+          setErrorMessage(err.message);
+        });
       });
   };
 
@@ -78,7 +82,9 @@ function App() {
       .catch((err) => {
         if (err.message === "Failed to fetch") {
           setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
+        } else err.then((err) => {
+          setErrorMessage(err.message);
+        });
       });
   };
 
@@ -94,7 +100,9 @@ function App() {
       .catch((err) => {
         if (err.message === "Failed to fetch") {
           setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
-        } else setErrorMessage(err.message);
+        } else err.then((err) => {
+          setErrorMessage(err.message);
+        });
       });
   };
 
@@ -109,8 +117,10 @@ function App() {
     localStorage.clear();
   };
 
+  const contextValue = {currentUser, setCurrentUser, setMessage, setErrorMessage}
+
     return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={contextValue}>
       <div className="page">
         <InfoTooltip
           closeAndClear={clearErrorAndMessage}

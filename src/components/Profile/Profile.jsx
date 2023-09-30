@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 function Profile({ handleEditUser, errorMessage, onSignOut, inputError }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const { values, handleChange, errors } = useFormWithValidation({
     name: currentUser.name,
