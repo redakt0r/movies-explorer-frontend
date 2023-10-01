@@ -1,9 +1,6 @@
-import { useLocation } from "react-router-dom";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import Preloader from "../Preloader/Preloader";
-import { useEffect, useState } from "react";
-import useWindowResize from "../../hooks/useWindowResize";
 
 function MoviesCardList({
   movies,
@@ -12,29 +9,6 @@ function MoviesCardList({
   isLoading,
   notFoundError,
 }) {
-  let windowWidth = useWindowResize();
-  const [moviesToRender, setMoviesToRender] = useState(
-    windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5
-  );
-  const location = useLocation();
-  const routeWithMoreButton = location.pathname === "/movies";
-
-  useEffect(() => {
-    if (!routeWithMoreButton) {
-      setMoviesToRender(100);
-    } else {
-      let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
-      setMoviesToRender(count);
-    }
-  }, [windowWidth, routeWithMoreButton]);
-
-  const handleAddMoreMovies = () => {
-    const count = windowWidth > 1213 ? 3 : 2;
-    setMoviesToRender((prevMoviesToRender) => {
-      return prevMoviesToRender + count;
-    });
-  };
-
   return (
     <>
       {isLoading ? (
@@ -43,31 +17,19 @@ function MoviesCardList({
         <section className="section movies-list" aria-label="Список фильмов">
           {!notFoundError ? (
             <ul className="movies-list__list">
-              {movies
-                .map((movie) => {
-                  return (
-                    <MoviesCard
-                      key={movie.id || movie._id}
-                      movie={movie}
-                      onSaveMovie={onSaveMovie}
-                      onDeleteMovie={onDeleteMovie}
-                    />
-                  );
-                })
-                .slice(0, moviesToRender)}
+              {movies.map((movie) => {
+                return (
+                  <MoviesCard
+                    key={movie.id || movie._id}
+                    movie={movie}
+                    onSaveMovie={onSaveMovie}
+                    onDeleteMovie={onDeleteMovie}
+                  />
+                );
+              })}
             </ul>
           ) : (
             <p className="movies-list__error">{notFoundError}</p>
-          )}
-          {routeWithMoreButton && movies.length > moviesToRender && (
-            <button
-              className="button movies-list__button"
-              type="button"
-              aria-label="Ещё фильмы"
-              onClick={handleAddMoreMovies}
-            >
-              Ещё
-            </button>
           )}
         </section>
       )}

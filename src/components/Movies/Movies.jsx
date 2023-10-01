@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { moviesApi } from "../../utils/MoviesApi";
 import { mainApi } from "../../utils/MainApi";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import useWindowResize from "../../hooks/useWindowResize";
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,23 @@ function Movies() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   const { setErrorMessage } = useContext(CurrentUserContext);
+
+  let windowWidth = useWindowResize();
+  const [numberOfMoviesToRender, setNumberOfMoviesToRender] = useState(
+    windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5
+  );
+
+  useEffect(() => {
+    let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
+    setNumberOfMoviesToRender(count);
+  }, [windowWidth]);
+
+  const handleAddMoreMovies = () => {
+    const count = windowWidth > 1213 ? 3 : 2;
+    setNumberOfMoviesToRender((prevMoviesToRender) => {
+      return prevMoviesToRender + count;
+    });
+  };
 
   useEffect(() => {
     const allMoviesFromStorage = localStorage.getItem("FullMoviesList");
@@ -63,6 +81,8 @@ function Movies() {
   };
 
   async function searchMovies(text, isChecked = false) {
+    let count = windowWidth > 1213 ? 12 : windowWidth > 784 ? 8 : 5;
+    setNumberOfMoviesToRender(count);
     setIsLoading(true);
     setIsShort(isChecked);
     localStorage.setItem("IsShort", JSON.stringify(isChecked));
@@ -79,7 +99,7 @@ function Movies() {
             movieId: movie.id,
           };
         });
-      } catch(err) {
+      } catch (err) {
         setIsLoading(false);
         if (err.message === "Failed to fetch") {
           console.log(err);
@@ -143,7 +163,10 @@ function Movies() {
       .saveMovie(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
-        localStorage.setItem('SavedMovies', JSON.stringify([res, ...savedMovies]));
+        localStorage.setItem(
+          "SavedMovies",
+          JSON.stringify([res, ...savedMovies])
+        );
       })
       .catch((err) => {
         if (err.message === "Failed to fetch") {
@@ -200,11 +223,23 @@ function Movies() {
       />
       <MoviesCardList
         isLoading={isLoading}
-        movies={markedAsSaveMoviesToRender}
+        movies={markedAsSaveMoviesToRender.slice(0, numberOfMoviesToRender)}
         onSaveMovie={onSaveMovie}
         onDeleteMovie={onDeleteMovie}
         notFoundError={notFoundError}
       />
+      {markedAsSaveMoviesToRender.length > numberOfMoviesToRender && (
+        <div className="movies__button-wrapper">
+          <button
+            className="button movies__button"
+            type="button"
+            aria-label="Ещё фильмы"
+            onClick={handleAddMoreMovies}
+          >
+            Ещё
+          </button>
+        </div>
+      )}
     </main>
   );
 }
