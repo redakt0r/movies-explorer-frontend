@@ -73,19 +73,18 @@ function SavedMovies() {
   };
 
   const onDeleteMovieInSavedMoviesRoute = (movie) => {
-    const id = savedMovies.find((item) => item.id === movie.id)._id;
     mainApi
-      .deleteMovie(id)
+      .deleteMovie(movie._id)
       .then((res) => {
         setSavedMovies((previousSavedMovies) =>
-          previousSavedMovies.filter((item) => item._id !== id)
+          previousSavedMovies.filter((item) => item._id !== movie._id)
         );
         localStorage.setItem(
           "SavedMovies",
-          JSON.stringify(savedMovies.filter((item) => item._id !== id))
+          JSON.stringify(savedMovies.filter((item) => item._id !== movie._id))
         );
         setMoviesToRender((previousMoviesToRender) =>
-          previousMoviesToRender.filter((item) => item._id !== id)
+          previousMoviesToRender.filter((item) => item._id !== movie._id)
         );
       })
       .catch((err) => {
@@ -96,6 +95,7 @@ function SavedMovies() {
           );
         } else setErrorMessage(err.message);
       });
+      console.log(savedMovies)
   };
 
   return (

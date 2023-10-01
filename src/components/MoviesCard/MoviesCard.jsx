@@ -43,7 +43,7 @@ function MoviesCard({ movie, onDeleteMovie, onSaveMovie }) {
             className="button movies-card__button movies-card__button_in-list"
             type="button"
             aria-label="Удалить"
-            onClick={onDeleteMovie}
+            onClick={() => onDeleteMovie(movie)}
           ></button>
         ) : (
           <button
