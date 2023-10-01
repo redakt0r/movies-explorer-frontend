@@ -18,22 +18,17 @@ function SavedMovies() {
   const { setErrorMessage } = useContext(CurrentUserContext);
 
   useEffect(() => {
-    const savedMoviesFromStorage = localStorage.getItem("SavedMovies");
-    if (savedMoviesFromStorage) {
-      setSavedMovies(JSON.parse(savedMoviesFromStorage));
-      setMoviesToRender(JSON.parse(savedMoviesFromStorage));
-    } else {
-      mainApi.getSavedMovies().then((movies) => {
-        if (movies.length === 0) {
-          setNotFoundError("Здесь будут ваши сохраненные фильмы");
-        } else {
-          setMoviesToRender(movies);
-          setSavedMovies(movies);
-          setNamesFilteredMovies(movies);
-          setNotFoundError("");
-        }
-      });
-    }
+    mainApi.getSavedMovies().then((movies) => {
+      if (movies.length === 0) {
+        setNotFoundError("Здесь будут ваши сохраненные фильмы");
+      } else {
+        setMoviesToRender(movies);
+        setSavedMovies(movies);
+        setNamesFilteredMovies(movies);
+        setNotFoundError("");
+        localStorage.setItem("SavedMovies", JSON.stringify(movies));
+      }
+    });
   }, [setMoviesToRender]);
 
   const isMovieShort = (movie, isChecked) => {

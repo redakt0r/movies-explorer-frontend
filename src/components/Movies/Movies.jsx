@@ -90,7 +90,7 @@ function Movies() {
     let moviesInFormat;
     if (fullMoviesList.length === 0) {
       try {
-        let allMovies = await moviesApi.getMovies();
+        const allMovies = await moviesApi.getMovies();
         moviesInFormat = await allMovies.map((movie) => {
           return {
             ...movie,
@@ -99,6 +99,9 @@ function Movies() {
             movieId: movie.id,
           };
         });
+        const savedMoviesFromApi = await mainApi.getSavedMovies();
+        setSavedMovies(savedMoviesFromApi);
+        localStorage.setItem("SearchedMovies", JSON.stringify(savedMoviesFromApi));
       } catch (err) {
         setIsLoading(false);
         if (err.message === "Failed to fetch") {
