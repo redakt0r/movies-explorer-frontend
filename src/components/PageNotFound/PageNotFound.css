@@ -24,6 +24,10 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.21;
+  background-color: var(--main-dark-grey);
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .page-not-found__container {
