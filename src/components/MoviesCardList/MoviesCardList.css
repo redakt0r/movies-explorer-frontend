@@ -16,19 +16,12 @@
   justify-items: center;
 }
 
-.movies-list__button {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  height: 36px;
-  color: #fff;
-  background-color: #2F2F2F;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: 0px;
-  width: 100%;
+.movies-list__error {
+  margin: 0 auto;
+  padding-top: 50px;
+  font-size: 20px;
+  line-height: 1.1;
+  text-align: center;
 }
 
 @media screen and (max-width: 860px) {

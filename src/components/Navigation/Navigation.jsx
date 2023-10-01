@@ -23,8 +23,8 @@ function Navigation({isLoggedIn, routeWithColoredHeader}) {
          :
         <div className='navigation'>
           <nav className='navigation__links'>
-            <NavLink className='link navigation__signup-link' to='/singup' >Регистрация</NavLink>
-            <NavLink className='link navigation__signin-link' to='/singin'>Войти</NavLink>
+            <NavLink className='link navigation__signup-link' to='/signup' >Регистрация</NavLink>
+            <NavLink className='link navigation__signin-link' to='/signin' >Войти</NavLink>
           </nav>
         </div>}
     </>
