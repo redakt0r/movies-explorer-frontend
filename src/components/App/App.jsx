@@ -44,7 +44,7 @@ function App() {
         if (err.message === "Failed to fetch") {
           setErrorMessage("Сервер недоступен. Проверьте интернет соединение или повторите попытку позже.");
         } else err.then((err) => {
-          setErrorMessage(err.message);
+          console.log(err.message);
         });
       });
   }, []);
