@@ -101,7 +101,7 @@ function Movies() {
         });
         const savedMoviesFromApi = await mainApi.getSavedMovies();
         setSavedMovies(savedMoviesFromApi);
-        localStorage.setItem("SearchedMovies", JSON.stringify(savedMoviesFromApi));
+        localStorage.setItem("SavedMovies", JSON.stringify(savedMoviesFromApi));
       } catch (err) {
         setIsLoading(false);
         if (err.message === "Failed to fetch") {
