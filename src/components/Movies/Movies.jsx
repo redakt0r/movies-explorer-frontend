@@ -69,7 +69,6 @@ function Movies() {
       setIsShort(JSON.parse(isShortFromStorage));
     }
   }, []);
-  console.log(localStorage);
 
   const isMovieShort = (movie, isChecked) => {
     if (isChecked) {
@@ -182,16 +181,16 @@ function Movies() {
   };
 
   const onDeleteMovie = (movie) => {
-    const id = savedMovies.find((item) => item.id === movie.id)._id;
+    // const id = savedMovies.find((item) => item.id === movie.id)._id;
     mainApi
-      .deleteMovie(id)
+      .deleteMovie(movie._id)
       .then((res) => {
         setSavedMovies((previousSavedMovies) =>
-          previousSavedMovies.filter((item) => item._id !== id)
+          previousSavedMovies.filter((item) => item._id !== movie._id)
         );
         localStorage.setItem(
           "SavedMovies",
-          JSON.stringify(savedMovies.filter((item) => item._id !== id))
+          JSON.stringify(savedMovies.filter((item) => item._id !== movie._id))
         );
       })
       .catch((err) => {
@@ -207,10 +206,16 @@ function Movies() {
   const filterSavedMovies = (movie, moviesList) => {
     return moviesList.find((item) => item.movieId === movie.id) ? true : false;
   };
+  const addSavedMovieId = (movie, moviesList) => {
+    const savedMovie =  moviesList.find((item) => item.movieId === movie.id);
+    if (savedMovie) return savedMovie._id;
+    else return null;
+  };
 
   const markedAsSaveMoviesToRender = searchedMovies.map((movie) => ({
     ...movie,
     saved: filterSavedMovies(movie, savedMovies),
+    _id: addSavedMovieId(movie, savedMovies),
   }));
 
   return (
